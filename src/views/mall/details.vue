@@ -158,7 +158,7 @@ export default {
     .topbox {
       padding: 20px 20px;
       p {
-        color: #0BAE6B;
+        color: #F6D692;
         font-size: 22px;
       }
       .name {
@@ -204,7 +204,7 @@ export default {
         font-size: 14px;
         color: #999999;
         span {
-          color: #0BBC74;
+          color: #F6D692;
         }
       }
       /deep/.good_details {
@@ -247,7 +247,8 @@ export default {
     .btnBuy {
       width: 300px;
       height: 32px;
-      background-color: #0BBC74;
+      //background-color: #0BBC74;
+      background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
       border-radius: 4px 4px 4px 4px;
       // border: 1px solid #EA3613;
       color: #FFFFFF;

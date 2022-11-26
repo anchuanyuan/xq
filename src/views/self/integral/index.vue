@@ -51,19 +51,23 @@ export default {
       list: [
         {
           title: '我的趣币',
-          img: require('../../../assets/img/self/wodejifen.png'),
+          img: require('../../../assets/img/self/wodejifen1.png'),
           url: '/self/integral/myPoints'
         },
         {
           title: '兑换记录',
-          img: require('../../../assets/img/self/duihuanjilu.png'),
+          img: require('../../../assets/img/self/duihuanjilu1.png'),
           url: '/self/integral/changeRecord'
 
         },
         {
           title: '我的粉丝',
-          img: require('../../../assets/img/self/wodefensi.png'),
+          img: require('../../../assets/img/self/wodefensi1.png'),
           url: '/self/integral/myFans'
+        },
+        {
+          title: '粉丝订单',
+          img: require('../../../assets/img/self/fensidingdan1.png')
         }
       ]
     };
@@ -113,7 +117,7 @@ export default {
       padding: 15px;
       color: #FFFFFF;
       font-size: 14px;
-      background: linear-gradient(180deg, #0B955D 0%, #19A76D 100%);
+      background: linear-gradient(180deg, #BEA84F 0%, #BCA64C 100%);
       border-radius: 4px 4px 4px 4px;
       .info_top {
         img {

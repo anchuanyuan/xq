@@ -24,9 +24,9 @@
       </div>
       <div class="btn">
         <!-- 已绑定显示修改 -->
-      <van-button block @click="state = false" :disabled="disabled" color="#0ABB75 " v-if="state">修改</van-button>
+      <van-button block @click="state = false" :disabled="disabled" class="both1" v-if="state">修改</van-button>
       <!-- 未绑定显示提交 -->
-      <van-button block @click="submit" :disabled="disabled" color="#0ABB75 " v-else>提交</van-button>
+      <van-button block @click="submit" :disabled="disabled" class="both2" v-else>提交</van-button>
       </div>
     </div>
 </template>
@@ -100,6 +100,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+.both1{
+  background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+  color: white;
+}
+.both2{
+  background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+  color: white;
+}
 .container {
   width: 100vw;
   .box {

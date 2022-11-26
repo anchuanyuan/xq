@@ -23,8 +23,8 @@
           <van-divider />
         </div>
         <van-radio-group v-model="radio">
-          <van-radio icon-size="18"  checked-color="#12a898" name="1">二维码支付</van-radio>
-          <van-radio icon-size="18"  checked-color="#12a898" name="2">银行卡支付</van-radio>
+          <van-radio icon-size="18"  checked-color="#F6D692" name="1">二维码支付</van-radio>
+          <van-radio icon-size="18"  checked-color="#F6D692" name="2">银行卡支付</van-radio>
         </van-radio-group>
         <div class="qrCode" v-if="radio == 1">
             <img :src="info.qrCode" />
@@ -45,7 +45,7 @@
               <div>
                 <img
                   @click="copy(info.bankCard)"
-                  src="@/assets/img/self/warehouse/copy.png"
+                  src="@/assets/img/self/warehouse/copy1.png"
                   alt=""
                 />
               </div>
@@ -81,7 +81,7 @@
         </div>
       </div>
       <div class="btn">
-        <van-button block @click="submit" :disabled="disabled" color="#13CEC0">提交订单</van-button>
+        <van-button block @click="submit" :disabled="disabled" class="btnBuy">提交订单</van-button>
       </div>
     </div>
   </div>
@@ -154,6 +154,10 @@ export default {
 </script>
 
 <style scoped lang="less">
+.btnBuy{
+  background: linear-gradient(180deg, #D0BB6B 0%, #AB9535 100%);
+  color: white;
+}
   .bei{
     width: 100%;
     // height: 100vh;
@@ -230,6 +234,7 @@ export default {
     }
     ::v-deep .van-slider__bar {
       background-color: #0091a8;
+      //background: linear-gradient(180deg, #F2D38E 0%, #B19A3C 100%);
     }
   }
   .flex-between {

@@ -121,12 +121,14 @@ export default {
     }
     .select {
       border-radius: 4px 4px 4px 4px;
-      background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+      //background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+      background: linear-gradient(to right,#AF993A,#CEB965,#AF993A);
     }
   }
   .my_points {
     height: 113px;
-    background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+    //background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+    background: linear-gradient(to right,#AF993A,#CEB965,#AF993A);
     color: #FFFFFF;
     border-radius: 8px 8px 8px 8px;
     >div {

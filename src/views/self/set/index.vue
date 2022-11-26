@@ -1,6 +1,6 @@
 <template>
   <div class="container" style="background-color: #000000; height: 100vh;">
-    <Header isback title="设置" rightText="修改密码" righturl="/self/set/setPassword"></Header>
+    <Header isback title="用户信息" rightText="修改密码" righturl="/self/set/setPassword"></Header>
     <van-cell-group style="border:none;">
       <van-cell center>
         <template #title>

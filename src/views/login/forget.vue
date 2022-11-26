@@ -155,12 +155,12 @@ export default {
       height: 30px;
       background: transparent;
       margin-top: 5px;
-      border: 1px solid #0BBC74;
+      border: 1px solid #CEB968;
       background-color: #121212;
-      color: #0BBc74;
+      color: #CEB968;
     }
     .SignIn {
-      background: #0BBC74;
+      background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
       color: #fff;
       border: none;
       margin-top: 16px;

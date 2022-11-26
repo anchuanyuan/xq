@@ -47,6 +47,7 @@ export default {
       show: false
     };
   },
+  //创建后生命周期
   created() {
     if (this.$route.query.id) {
       this.id = this.$route.query.id
@@ -66,6 +67,9 @@ export default {
     finishDown() {
       this.getInfo()
     },
+
+
+    //抢购商品详情渲染数据接口
     getInfo() {
       this.$post({
         module: 'Nft',
@@ -78,6 +82,9 @@ export default {
         this.info = res.data
       })
     },
+
+
+    //点击立即购买
     submit() {
       this.disabled = true
       this.$post({
@@ -87,6 +94,7 @@ export default {
           id: this.info.id
         }
       }).then(res => {
+        //弹出框
         this.$toast(res.message)
         this.$router.back()
         // console.log(res,'购买详情')
@@ -145,7 +153,7 @@ export default {
         color: #999999;
 
         .red {
-          color: #0BBC74;
+          color: #F6D692;
         }
       }
 
@@ -176,7 +184,8 @@ export default {
     .btnCard {
       width: 100%;
       height: 32px;
-      background: #0BBC74;
+      //background: #0BBC74;
+      background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
       border-radius: 4px 4px 4px 4px;
       color: #FFFFFF;
       border: none;

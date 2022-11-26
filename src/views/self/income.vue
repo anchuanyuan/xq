@@ -98,7 +98,7 @@ export default {
     }
     .van-cell__value {
       font-size: 18px;
-      color: #0BBC74;
+      color: #F6D692;
     }
     .van-cell__title {
       font-size: 16px;
@@ -116,7 +116,8 @@ export default {
   padding: 10px 15px;
   .income-box {
     padding: 30px;
-    background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+    background: linear-gradient(to right,#AF993A,#CEB965,#AF993A);
+    //background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
     border-radius: 10px;
     // background: url("../../assets/img/self/income.png") no-repeat;
     // background-size: 100% 100%;

@@ -93,7 +93,7 @@ export default {
       color: #999999;
     }
     .negative {
-      color: #0BBC74;
+      color: #F6D692;
     }
   }
 }

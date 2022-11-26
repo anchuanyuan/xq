@@ -55,12 +55,12 @@
             :max-count="1"
             preview-size="100px"
           >
-          <img class="upload_img" src="../../assets/img/home/upload.png" alt="">
+          <img class="upload_img" src="../../assets/img/home/upload1.png" alt="">
           </van-uploader>
         </div>
       </div>
       <div class="btn">
-        <van-button block @click="submit" color="#13CEC0">立即缴纳</van-button>
+        <van-button block @click="submit" class="both">立即缴纳</van-button>
       </div>
     </div>
   </div>
@@ -94,8 +94,8 @@ export default {
         }
       }).then(res => {
         console.log(res,'缴纳保证金')
-        this.$toast(res.message)
-        this.$router.back()
+        // this.$toast(res.message)
+        // this.$router.back()
       })
     },
     payDeposit(){
@@ -121,19 +121,23 @@ export default {
 </script>
 
 <style scoped lang="less">
+.both{
+  background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+  color: white;
+}
 .outside {
   padding: 10px;
 }
 .box {
   margin-top: 16px;
   padding: 10px;
-  background: #ffffff;
+  //background: #ffffff;
   border-radius: 4px 4px 4px 4px;
   opacity: 1;
   .label {
     font-size: 15px;
     font-weight: 400;
-    color: #333333;
+    color: #fff;
   }
 }
 .goods-box {
@@ -191,7 +195,8 @@ export default {
       height: 14px;
     }
     ::v-deep .van-slider__bar {
-      background-color: #0091a8;
+      background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+      //background-color: #0091a8;
     }
   }
   .flex-between {
@@ -215,6 +220,7 @@ export default {
   }
   .qrCode {
     text-align: center;
+    color: #fff;
     img {
       width: 200px;
       height: 200px;

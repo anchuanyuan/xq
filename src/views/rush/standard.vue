@@ -153,7 +153,8 @@ export default {
     }
 
     .confirmBtn {
-      background-color: #0BBC74;
+      //background-color: #0BBC74;
+      background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
       color: #FFFFFF;
     }
   }

@@ -77,7 +77,7 @@ export default {
     color: #999999;
     line-height: 22px;
     .default {
-      color: #0BBC74;
+      color: #F6D692;
     }
   }
 }

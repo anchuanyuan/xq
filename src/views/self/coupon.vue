@@ -11,7 +11,7 @@
         <div class="coupon-box" v-for="(item,index) in couponList" :key="index">
           <div class="box1">
             <!-- 亮 -->
-            <img src="@/assets/img/self/mingguding1.png" alt="" class="left-top" v-if="item.status == 0 && item.coupons && item.coupons.type == 'fixed'">
+            <img src="@/assets/img/self/mingguding2.png" alt="" class="left-top" v-if="item.status == 0 && item.coupons && item.coupons.type == 'fixed'">
             <img src="@/assets/img/self/mingzhekou1.png" alt="" class="left-top" v-if="item.status == 0 && item.coupons && item.coupons.type == 'percent'">
             <!-- 暗 -->
             <img src="@/assets/img/self/anguding1.png" alt="" class="left-top" v-if="item.status == 1 && item.coupons && item.coupons.type == 'fixed'">
@@ -116,7 +116,7 @@ export default {
       line-height:60px;
       text-align: center;
       font-size: 40px;
-      color: #0BBC74;
+      color: #F6D692;
     }
     .number-nor{
       color: #999999;
@@ -150,7 +150,7 @@ export default {
       width: 35px;
       height: 71px;
       background: #1B1B1B;
-      color: #0BBC74;
+      color: #F6D692;
       font-size: 15px;
       writing-mode: vertical-lr;
       text-align:  center;

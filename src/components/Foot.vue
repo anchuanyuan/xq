@@ -21,6 +21,8 @@
         </div>
       </div>
     </div>
+
+    <div>wedefr</div>
   </div>
 </template>
 
@@ -34,35 +36,35 @@ export default {
           name: "首页",
           title: "首页",
           img: require("../assets/foot/shouye3.png"),
-          activeImg: require("../assets/foot/shouye4.png"),
+          activeImg: require("../assets/foot/shouye5.png"),
           url: "/",
         },
         {
-          name: "挂卖",
-          title: "挂卖",
+          name: "抢购",
+          title: "抢购",
           img: require("../assets/foot/qianggou3.png"),
-          activeImg: require("../assets/foot/qianggou4.png"),
+          activeImg: require("../assets/foot/qianggou5.png"),
           url: "/rush",
         },
         {
           name: "兑换商城",
           title: "兑换商城",
           img: require("../assets/foot/duihuan3.png"),
-          activeImg: require("../assets/foot/duihuan4.png"),
+          activeImg: require("../assets/foot/duihuan5.png"),
           url: "/mall",
         },
         {
           name: "购物车",
           title: "购物车",
           img: require("../assets/foot/gouwuche3.png"),
-          activeImg: require("../assets/foot/gouwuche4.png"),
+          activeImg: require("../assets/foot/gouwuche5.png"),
           url: "/cart",
         },
         {
           name: "我的",
           title: "我的",
           img: require("../assets/foot/wode3.png"),
-          activeImg: require("../assets/foot/wode4.png"),
+          activeImg: require("../assets/foot/wode5.png"),
           url: "/self",
         },
       ],
@@ -148,7 +150,7 @@ export default {
   align-items: center;
 
   .active {
-    color: #0BBC74;
+    color: #C9AF74;
   }
 
   &.big > .foot-item-real > img {

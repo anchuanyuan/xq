@@ -31,10 +31,10 @@
     </div>
     <div class="btn">
       <!-- 已绑定显示修改 -->
-      <van-button block @click="state = false" :disabled="disabled" color="#0ABB75 " v-if="state">修改</van-button>
-      <van-button block @click="backPage()" :disabled="disabled" color="#0ABB75 " v-if="state" style="margin-top:15px">返回</van-button>
+      <van-button block @click="state = false" :disabled="disabled" class="both1" v-if="state">修改</van-button>
+      <van-button block @click="backPage()" :disabled="disabled" class="both1" v-if="state" style="margin-top:15px">返回</van-button>
       <!-- 未绑定显示提交 -->
-      <van-button block @click="submit" :disabled="disabled" color="#0ABB75 " v-else>提交</van-button>
+      <van-button block @click="submit" :disabled="disabled" class="both1" v-else>提交</van-button>
     </div>
   </div>
 </template>
@@ -117,6 +117,18 @@ methods: {
 </script>
 
 <style scoped lang="less">
+.both1{
+  background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+  color: white;
+}
+.both2{
+  background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+  color: white;
+}
+.both3{
+  background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+  color: white;
+}
 .container {
 width: 100vw;
 .box {

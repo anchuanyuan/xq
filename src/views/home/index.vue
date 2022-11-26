@@ -2,7 +2,7 @@
   <div class="container">
     <div class="kuan">
       <div class="heder_top">
-        <img src="../../picture/形状 2.png" alt="">
+        <img src="../../picture/形状 4.png" alt="">
         <p>首页</p>
       </div>
       <div class="input">
@@ -19,15 +19,13 @@
           <van-swipe-item>4</van-swipe-item>
         </van-swipe> -->
 
-
+<!--        轮播图-->
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" style="border-radius: 15px;">
           <van-swipe-item v-for="(item,index) in bannerList" :key="index">
             <img class="img" :src="item.src" alt="">
             <!-- <img src="../../picture/组 3 拷贝.png" alt=""> -->
           </van-swipe-item>
         </van-swipe>
-
-
       </div>
 
       <!-- 热门分类 -->
@@ -67,18 +65,21 @@
         </div>
       </div>
     </div> -->
-
+      <div class="text">
+        <div class="text-color">........ 爆款 ........</div>
+      </div>
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="good_list">
           <div class="good_list_item" @click="$router.push('/home/details?id=' + item.id)" v-for="(item,index) in list"
             :key="index">
-            <div class="good_list_item_tu"><img :src="item.cover" alt=""></div>
-            <p class="name">{{ item.name }}</p>
-            <div class="good_list_item_img">
-              <p class="perice">￥ {{ parseInt(Number(item.price)) }} </p>
-              <img src="../../picture/jian.png" alt="" class="img1">
-            </div>
-
+              <div class="good_list_item_tu"><img :src="item.cover" alt=""></div>
+              <p class="name">{{ item.name }}</p>
+              <div class="good_list_item_img">
+                <div class="text-top">
+                  <p class="perice">￥ </p><p class="perices">{{ parseInt(Number(item.price)) }}</p>
+                </div>
+                <img src="../../picture/jian1.png" alt="" class="img1">
+              </div>
           </div>
         </div>
       </van-list>
@@ -159,6 +160,7 @@ export default {
         this.page++
         this.lastId = res.data.lastId
         this.list.push(...res.data.list)
+        console.log(this.list)
         if (this.page > res.data.lastPage) {
           this.finished = true
         }
@@ -234,6 +236,24 @@ export default {
 </script>
 
 <style scoped lang="less">
+.text-top{
+  display: flex;
+}
+.list{
+  width: 100%;
+  height: 200px;
+  background-color: #0ABB75;
+}
+.text{
+  width: 100%;
+  height: 50px;
+  //background-color: #1aa8fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F6D692;
+  font-size: 24px;
+}
 .kuan {
   width: 92%;
   height: 100%;
@@ -398,14 +418,14 @@ export default {
       padding: 8px;
       position: relative;
 
-      .name {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        // color: white;
-      }
+      //.name {
+      //  overflow: hidden;
+      //  text-overflow: ellipsis;
+      //  display: -webkit-box;
+      //  -webkit-box-orient: vertical;
+      //  -webkit-line-clamp: 1;
+      //  // color: white;
+      //}
 
       .red-line {
         position: absolute;
@@ -430,27 +450,27 @@ export default {
 
   .good_list {
     width: 100%;
-    // display: flex;
-    // flex-wrap: wrap;
-    // justify-content: space-between;
-
+    //background-color: #0ABB75;
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
     .good_list_item {
       // padding: 10px;
-      width: 100%;
-      height: 385px;
+      width: 32%;
+      height: 170px;
       margin: 0 auto;
       // text-align: center;
       background-color: #1F1F1F;
-      border: 3px solid #0bbc74;
+      border: 3px solid #F6D692;
       margin-top: 10px;
       border-radius: 5px;
       // border-right: 1px solid #BFBFBF;
       // border-bottom: 1px solid #BFBFBF;
       .good_list_item_tu {
         // width: 85%;
-        height: 295.5px;
+        height: 105px;
         margin: 0 auto;
-        border-bottom: 3px solid #0bbc74;
+        border-bottom: 3px solid #F6D692;
         // display: block;
         // position: relative;
         display: flex;
@@ -474,14 +494,15 @@ export default {
 
       .name {
         font-size: 15px;
-        height: 45px;
+        //height: 45px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
         padding-top: 10px;
-        margin-left: 22px;
+        margin-left: 9px;
+        margin-right: 5px;
         font-size: 13px;
         color: white;
       }
@@ -489,23 +510,29 @@ export default {
 
       .good_list_item_img {
         width: 100%;
+        //background-color: #0ABB75;
         display: flex;
-        flex-direction: row;
-        align-items: center;
+        margin-top: 6px;
+        //flex-direction: row;
+        //align-items: center;
         justify-content: space-between;
 
         .img1 {
-          width: 16px;
-          height: 16px;
+          width: 15px;
+          height: 15px;
           vertical-align: middle;
-          margin-right: 20px;
+          margin-right: 4.5px;
         }
 
         .perice {
           // padding-top: 10px;
-          font-size: 16px;
-          color: #0bbc74;
-          margin-left: 20px;
+          font-size: 10px;
+          color: #F6D692;
+          margin-left: 10px;
+        }
+        .perices{
+          font-size: 15px;
+          color: #F6D692;
         }
       }
     }

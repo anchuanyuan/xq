@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Header title="兑换商品"></Header>
+    <Header title="兑换商城"></Header>
     <div class="kuan">
       <div class="advertise">
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
@@ -20,7 +20,7 @@
             <p class="name">{{ item.goodName }}</p>
             <div class="good_list_item_img">
               <p class="perice">{{ parseInt(Number(item.numerical)) }}趣币</p>
-              <img src="../../picture/jian.png" alt="" class="img1">
+              <img src="../../picture/jian1.png" alt="" class="img1">
             </div>
 
           </div>
@@ -380,7 +380,7 @@ export default {
       margin: 0 auto;
       // text-align: center;
       background-color: #1F1F1F;
-      border: 3px solid #0BBC74;
+      border: 3px solid #F6D692;
       margin-top: 10px;
       border-radius: 5px;
       // border-right: 1px solid #BFBFBF;
@@ -389,7 +389,7 @@ export default {
         // width: 85%;
         height: 295.5px;
         margin: 0 auto;
-        border-bottom: 3px solid #0BBC74;
+        border-bottom: 3px solid #F6D692;
         // display: block;
         // position: relative;
         display: flex;
@@ -443,7 +443,7 @@ export default {
         .perice {
           // padding-top: 10px;
           font-size: 16px;
-          color: #0BBC74;
+          color: #F6D692;
           margin-left: 20px;
         }
       }

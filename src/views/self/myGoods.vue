@@ -89,7 +89,7 @@ export default {
         color: #ffffff;
         .red_text {
           font-size: 12px;
-          color: #0BBC74;
+          color: #F6D692;
         }
       }
       .box_content {

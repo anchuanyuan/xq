@@ -1,4 +1,5 @@
 <template>
+<!--  狂欢场页-->
   <div class="container">
     <Header :title="title" isback url="/rush"></Header>
     <!-- <van-tabs background="#F4F1E8" line-width="21px" line-height="2px" @change="change" color="#000000" v-model="active">
@@ -127,6 +128,7 @@ export default {
         // console.log(res,'价格区间')
       })
     },
+    //狂欢场页面渲染接口
     getList() {
       this.$post({
         module: 'Nft',
@@ -141,11 +143,12 @@ export default {
           time: new Date().getTime()
         }
       }).then(res => {
+        // console.log(res)
         this.lastId = res.data.lastId
         this.list = res.data.list
         this.pageNum = res.data.lastPage
         if(this.pageNum < 10) this.pageNum = 8
-        console.log(res,'抢购数据')
+        // console.log(res,'抢购数据')
       })
     },
     selectPrice(item, index) {
@@ -265,15 +268,15 @@ export default {
         padding: 2px 6px 0;
         .perice {
           font-size: 16px;
-          color: #00FF95;
+          color: #F6D692;
         }
         .van-button {
           width: 65px;
           height: 20px;
           padding: 0;
           background: #1B1B1B;
-          border: 1px solid #00FF95;
-          color: #00FF95;
+          border: 1px solid #F6D692;
+          color: #F6D692;
           border-radius: 5px;
           font-size: 12px;
         }
@@ -326,8 +329,8 @@ export default {
       text-align: center;
     }
     .selectDiv {
-      border-bottom: 2px solid #00FF95;
-      color: #00FF95;
+      border-bottom: 2px solid #F6D692;
+      color: #F6D692;
     }
   }
   .page_popup {

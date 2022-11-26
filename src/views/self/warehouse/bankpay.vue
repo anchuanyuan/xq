@@ -97,7 +97,7 @@
         </div> -->
       </div>
       <div class="btn">
-        <van-button type="button" block @click="payConfirm(id)" :disabled="disabled" color="#0ABB75 ">确认支付</van-button>
+        <van-button type="button" block @click="payConfirm(id)" :disabled="disabled" class="both">确认支付</van-button>
       </div>
 
       <!-- <div @click="afterRead(file)">测试</div> -->
@@ -111,9 +111,9 @@ export default {
       fileList: [],
       disabled: false,
       payTypeList:[
-        {name:'银行卡支付',img1:require("@/assets/img/self/warehouse/bank1.png"),img2:require("@/assets/img/self/warehouse/bank2.png")},
-        {name:'支付宝支付',img1:require("@/assets/img/self/warehouse/zfb.png"),img2:require("@/assets/img/self/warehouse/zfb1.png")},
-        {name:'微信支付',img1:require("@/assets/img/self/warehouse/wx.png"),img2:require("@/assets/img/self/warehouse/wx1.png")},
+        {name:'银行卡支付',img1:require("@/assets/img/self/warehouse/bank1.png"),img2:require("@/assets/img/self/warehouse/bank3.png")},
+        {name:'支付宝支付',img1:require("@/assets/img/self/warehouse/zfb.png"),img2:require("@/assets/img/self/warehouse/zfb2.png")},
+        {name:'微信支付',img1:require("@/assets/img/self/warehouse/wx.png"),img2:require("@/assets/img/self/warehouse/wx2.png")},
       ],
       payActive:0,
       bankInfo:'',
@@ -196,6 +196,10 @@ export default {
 </script>
 
 <style scoped lang="less">
+.both{
+  background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+  color: white;
+}
 .container {
   width: 100vw;
   .box {
@@ -237,7 +241,7 @@ export default {
             text-align: center;
         }
         .textActive{
-          color: #0bbc74;
+          color: #F6D692;
         }
     }
   }

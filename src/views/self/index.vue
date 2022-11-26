@@ -6,7 +6,9 @@
           <img class="avatar" :src="userInfo.avatar" alt="" />
           <div class="nickname">{{ userInfo.nickname }}</div>
         </div>
-        <img class="she_zhi" @click="$router.push('/self/set')" src="@/assets/img/self/she_zhi.png" alt="" />
+        <div>
+          <img class="she_zhi" @click="$router.push('/self/set')" src="@/assets/img/self/she_zhi.png" alt="" />
+        </div>
       </div>
 
       <div class="buyer">
@@ -16,28 +18,28 @@
             to="/self/warehouse?type=1"
             class="buyerMenuItem flex-center"
           >
-            <img src="@/assets/img/self/wo_de_cang_ku1.png" alt="" />
+            <img src="@/assets/img/self/wo_de_cang_ku3.png" alt="" />
             <p>我的仓库</p>
           </router-link>
           <router-link
             to="/self/warehouse?type=1&active=3"
             class="buyerMenuItem flex-center"
           >
-            <img src="@/assets/img/self/que_ren_fu_kuan1.png" alt="" />
+            <img src="@/assets/img/self/que_ren_fu_kuan3.png" alt="" />
             <p>确认付款</p>
           </router-link>
           <router-link
             to="/self/warehouse?type=1&active=5"
             class="buyerMenuItem flex-center"
           >
-            <img src="@/assets/img/self/que_ren_shou_kuan1.png" alt="" />
+            <img src="@/assets/img/self/que_ren_shou_kuan3.png" alt="" />
             <p>确认收款</p>
           </router-link>
           <router-link
             to="/self/warehouse?type=1&active=7"
             class="buyerMenuItem flex-center"
           >
-            <img src="@/assets/img/self/yi_wan_cheng1.png" alt="" />
+            <img src="@/assets/img/self/yi_wan_cheng3.png" alt="" />
             <p>已完成</p>
           </router-link>
         </div>
@@ -51,28 +53,28 @@
           to="/self/warehouse/order?type=-1"
           class="sellerMenuItem flex-center"
         >
-          <img src="@/assets/img/self/wo_de_cang_ku1.png" alt="" />
+          <img src="@/assets/img/self/wo_de_cang_ku2.png" alt="" />
           <p>我的仓库</p>
         </router-link>
         <router-link
           to="/self/warehouse/order?type=-1&active=3"
           class="sellerMenuItem flex-center"
         >
-          <img src="@/assets/img/self/que_ren_fu_kuan1.png" alt="" />
+          <img src="@/assets/img/self/que_ren_fu_kuan2.png" alt="" />
           <p>确认付款</p>
         </router-link>
         <router-link
           to="/self/warehouse/order?type=-1&active=5"
           class="sellerMenuItem flex-center"
         >
-          <img src="@/assets/img/self/que_ren_shou_kuan1.png" alt="" />
+          <img src="@/assets/img/self/que_ren_shou_kuan2.png" alt="" />
           <p>确认收款</p>
         </router-link>
         <router-link
           to="/self/warehouse/order?type=-1&active=7"
           class="sellerMenuItem flex-center"
         >
-          <img src="@/assets/img/self/yi_wan_cheng1.png" alt="" />
+          <img src="@/assets/img/self/yi_wan_cheng2.png" alt="" />
           <p>已完成</p>
         </router-link>
       </div>
@@ -134,7 +136,7 @@ export default {
         {
           id: 0,
           title: "我的商品",
-          image: require("@/assets/img/self/wo_de_shang_pin.png"),
+          image: require("@/assets/img/self/wo_de_shang_pin1.png"),
           url: "/self/myGoods",
         },
         // {
@@ -146,19 +148,19 @@ export default {
         {
           id: 2,
           title: "我的地址",
-          image: require("@/assets/img/self/wo_de_di_zhi.png"),
+          image: require("@/assets/img/self/wo_de_di_zhi1.png"),
           url: "/self/myAddress",
         },
         {
           id: 3,
           title: "我的优惠劵",
-          image: require("@/assets/img/self/you_hui_quan.png"),
+          image: require("@/assets/img/self/you_hui_quan1.png"),
           url: "/self/coupon",
         },
         {
           id: 4,
-          title: "我的邀请",
-          image: require("@/assets/img/self/er_wei_ma.png"),
+          title: "我的邀请二维码",
+          image: require("@/assets/img/self/er_wei_ma1.png"),
           url: "/self/inviteCode",
         },
       ],
@@ -166,25 +168,25 @@ export default {
         {
           id: 0,
           title: "趣币中心",
-          image: require("@/assets/img/self/ji_fen_zhong_xin.png"),
+          image: require("@/assets/img/self/ji_fen_zhong_xin1.png"),
           url: "/self/integral",
         },
         {
           id: 1,
           title: "收款管理",
-          image: require("@/assets/img/self/shou_kuan_guan_li.png"),
+          image: require("@/assets/img/self/shou_kuan_guan_li1.png"),
           url: "/self/moneyindex",
         },
         {
           id: 2,
           title: "我的收益",
-          image: require("@/assets/img/self/wo_de_shou_yi.png"),
+          image: require("@/assets/img/self/wo_de_shou_yi1.png"),
           url: "/self/income",
         },
         {
           id: 4,
           title: "联系客服",
-          image: require("@/assets/img/self/kefu.png"),
+          image: require("@/assets/img/self/kefu1.png"),
           url: "/self/service",
         },
       ],
@@ -266,30 +268,54 @@ export default {
 .top {
   width: 100%;
   height: 249px;
+  //background-color: #1aa8fe;
+  //display: flex;
+  //flex-direction: column;
+
   // background-image: url("~@/assets/img/self/selfTop1.png");
   // background-repeat: no-repeat;
   // background-size: 100% 100%;
-  padding-top: 47px;
+  padding-top: 32px;
   position: relative;
+  //.infoLeft flex-row{
+  //  width: 100%;
+  //  height: 100px;
+  //  display: flex;
+  //  flex-direction: column;
+  //  align-content: center;
+  //  justify-items: center;
+  //  background-color: white;
+  //}
   .info {
-    padding: 0 31px 0 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    //padding: 0 31px 0 15px;
+    //position: relative;
     .infoLeft {
+      display: flex;
+      flex-direction: column;
       .avatar {
         width: 70px;
         height: 70px;
         background: #d8d8d8;
+        //position: absolute;
         border: 2px solid rgba(255, 255, 255, 0.4784);
         border-radius: 50%;
       }
       .nickname {
         font-size: 18px;
         font-family: SimHei;
+        margin-top: 6px;
         font-weight: 400;
         color: #ffffff;
-        padding-left: 11px;
+        //padding-left: 0px;
       }
     }
     .she_zhi {
+      position: absolute;
+      right: 22px;
+      top: -10px;
       width: 22px;
       height: 22px;
     }
@@ -297,7 +323,9 @@ export default {
   .buyer {
     width: 345px;
     height: 115px;
-    background: #1B1B1B;
+    //background: #1B1B1B;
+    background: linear-gradient(to bottom left, #DABE83, #AF9152);
+    //background: linear-gradient(180deg, #DABE83 0%, #AF9152 100%);
     border-radius: 5px;
     position: absolute;
     bottom: 0;
@@ -323,7 +351,7 @@ export default {
           font-size: 12px;
           font-family: SimHei;
           font-weight: 400;
-          color: #999999;
+          color: #fff;
           margin-top: 9px;
         }
       }
@@ -356,7 +384,7 @@ export default {
         font-size: 12px;
         font-family: SimHei;
         font-weight: 400;
-        color: #999999;
+        color: #fff;
         margin-top: 9px;
       }
     }
@@ -382,7 +410,7 @@ export default {
         font-size: 15px;
         font-family: SimHei;
         font-weight: 400;
-        color: #999999;
+        color: #fff;
         line-height: 17px;
         padding-left: 11px;
       }
@@ -400,7 +428,7 @@ export default {
   font-size: 15px;
   font-family: SimHei;
   font-weight: 400;
-  color: #00FF95;
+  color: #F6D692;
   line-height: 17px;
   // width: 100%;
   height: 50px;

@@ -8,7 +8,7 @@
           <img :src=data.frontUrl alt="" style="height: 100%;">
         </div>
       <div class="btn">
-        <van-button type="button" block @click="takeGoods(id)" :disabled="disabled" color="#0ABB75 ">线下提货</van-button>
+        <van-button type="button" block @click="takeGoods(id)" :disabled="disabled" class="both">线下提货</van-button>
       </div>
     </div>
 </template>
@@ -69,6 +69,10 @@ export default {
 </script>
 
 <style scoped lang="less">
+.both{
+  background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
+  color: white;
+}
 .container {
   width: 100vw;
   .box {

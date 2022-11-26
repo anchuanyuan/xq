@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="footer_btn">
-      <img src="../../picture/组 1315.png" @click="$router.push('/cart')" alt="">
+      <img src="../../picture/carnav.png" @click="$router.push('/cart')" alt="">
       <div>
         <van-button class="btnCard" type="default" @click="addCart">添加购物车</van-button>
         <van-button class="btnBuy" type="default" @click="submit">立即购买</van-button>
@@ -125,7 +125,7 @@ export default {
         font-size: 14px;
         color: #999999;
         span {
-          color: #0BBC74;
+          color: #F6D692;
         }
       }
       /deep/.good_details {
@@ -162,7 +162,7 @@ export default {
       
       width: 102px;
       height: 32px;
-      background-color: #0BBC74;
+      background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
       border-radius: 4px 4px 4px 4px;
       // border: 1px solid #EA3613;
       color: #FFFFFF;

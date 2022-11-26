@@ -104,7 +104,8 @@ export default {
       justify-content: space-around;
       color: #FFFFFF;
       font-size: 14px;
-      background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+      //background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+      background: linear-gradient(to right,#AF993A,#CEB965,#AF993A);
       border-radius: 10px;
       // background-image: url('../../assets/img/self/bankBg.png');
       // background-size: 100% 100%;

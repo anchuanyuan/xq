@@ -231,7 +231,7 @@ export default {
 
       // padding-top: 5px;
       .perice {
-        color: #0BBC74;
+        color: #F6D692;
       }
     }
 
@@ -286,7 +286,7 @@ export default {
 
     p {
       span {
-        color: #0BBC74;
+        color: #F6D692;
       }
     }
 
@@ -297,9 +297,10 @@ export default {
     .btnBuy {
       width: 102px;
       height: 32px;
-      background-color: #0BBC74;
+      //background-color: #F6D692;
+      background: linear-gradient(180deg, #F2D38E 0%, #B19A3C 100%);
       border-radius: 4px 4px 4px 4px;
-      border: 1px solid #0BBC74;
+      //border: 1px solid #F6D692;
       color: #FFFFFF;
       margin-left: 10px;
     }

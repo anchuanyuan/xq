@@ -111,13 +111,15 @@ export default {
     }
     .select {
       border-radius: 4px 4px 4px 4px;
-      background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+      //background: linear-gradient(180deg, #AF993A 0%, #CEB965 100%);
+      background: linear-gradient(to right,#AF993A,#CEB965,#AF993A);
       color: #FFFFFF;
     }
   }
   .my_points {
     height: 56px;
-    background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+    background: linear-gradient(to right,#AF993A,#CEB965,#AF993A);
+    //background: linear-gradient(90deg, #AF993A 0%, #CEB965 100%, #AF993A 0%);
     color: #FFFFFF;
     >div {
       width: 48%;
@@ -141,7 +143,7 @@ export default {
     }
     .van-cell__value {
       font-size: 18px;
-      color: #0BBC74;
+      color: #F6D692;
     }
     .van-cell__title {
       font-size: 16px;

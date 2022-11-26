@@ -586,7 +586,7 @@ export default {
         font-size: 11px;
         font-family: PingFang SC-Regular, PingFang SC;
         font-weight: 400;
-        color: #0BBC74;
+        color: #F6D692;
         margin-top: 4px;
       }
 
@@ -624,7 +624,7 @@ export default {
               font-size: 10px;
               font-family: PingFang SC-Regular, PingFang SC;
               font-weight: 400;
-              color: #0BBC74;
+              color: #F6D692;
             }
           }
         }
@@ -667,7 +667,7 @@ export default {
           font-size: 11px;
           font-family: PingFang SC-Regular, PingFang SC;
           font-weight: 400;
-          color: #ffffff;
+          color: #F6D692;
           padding: 2px 5px;
           border-radius: 2px;
           background-color: #333333;

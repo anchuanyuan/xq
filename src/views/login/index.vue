@@ -121,7 +121,8 @@ export default {
     .van-button {
       width: 283px;
       height: 30px;
-      background: #0BBC74;
+      //background: #0BBC74;
+      background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
       color: #fff;
       //去掉边框
       border: none;

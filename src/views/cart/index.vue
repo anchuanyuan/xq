@@ -24,7 +24,7 @@
               <div class="goodsBox">
                 <div class="redio">
                   <div>
-                    <van-radio @click="changeRadio(item)" checked-color="#0BBC74"  icon-size="15px" :name="item.id"></van-radio>
+                    <van-radio @click="changeRadio(item)" checked-color="#F6D692"  icon-size="15px" :name="item.id"></van-radio>
                   </div>
                 </div>
                 <div class="goodsImg">
@@ -222,7 +222,7 @@ export default {
     font-weight: bold;
     color: #ffffff;
     .price {
-      color: #0BBC74;
+      color: #F6D692;
       font-size: 18px;
     }
   }
@@ -232,7 +232,7 @@ export default {
       width: 95px;
       height: 30px;
       border: none;
-      background: linear-gradient(180deg, #0B955D 0%, #18A66C 100%);
+      background: linear-gradient(180deg, #CEB968 0%, #AD9737 100%);
       // background: #fc3d42;
       border-radius: 15px;
       font-size: 15px;
@@ -299,7 +299,7 @@ export default {
           font-size: 18px;
           font-family: SimHei;
           font-weight: 400;
-          color: #0BBC74;
+          color: #F6D692;
           small {
             font-size: 12px;
           }

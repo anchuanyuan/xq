@@ -1,11 +1,11 @@
 <template>
-  <div class="container" style="background-color: ">
-    <Header title="挂卖"></Header>
+  <div class="container">
+    <Header title="抢购"></Header>
     <van-overlay class="overlay" :show="show" />
     <div class="box" v-if="tips != '待开放'">
       <van-notice-bar
         left-icon="volume-o"
-        color="#0bbc74"
+        color="#F6D692"
         font-size="13px"
         text="请仔细阅读《商城挂卖付款协议》"
       />
@@ -73,6 +73,8 @@ export default {
   },
   methods: {
     getUserInfo() {
+      //使用 AJAX 的 HTTP POST 请求从服务器加载数据
+      //传参
       this.$post({
         module: 'Payment',
         interface: '7000',
@@ -80,10 +82,14 @@ export default {
         }
       }).then(res => {
         this.userInfo = res.data
-        console.log(res,'信息')
+        // console.log(this.userInfo)
+        // console.log(res,'信息')
       })
     },
     toGoods(id,title) {
+      //点击每个模块的id和每个模块的名字
+      // console.log(id)
+      // console.log(title)
       this.$post({
         module: 'Nft',
         interface: '1001',
@@ -91,6 +97,7 @@ export default {
           sceneId: id
         }
       }).then(() => {
+        //点击每个模块跳转到相应的模块地址栏显示id和title
         this.$router.replace({
           path: '/rush/good',
           query: {
@@ -100,6 +107,7 @@ export default {
         })
       })
     },
+    //用户信息接口
     payDeposit(){
       this.$post({
         module: 'User',
@@ -108,12 +116,14 @@ export default {
         }
       }).then((res) => {
         this.bond = res.data.isEnsure
+        // console.log(this.bond)
         // this.bond = 0
         // console.log(res,'是否缴纳保证金')
+        //打印出来是用户的信息
         this.getreadType()
       })
     },
-
+    //// 查看是否添加过 收款 收货 信息接口
     getreadType() {
       // 未缴纳保证金
       if(this.bond == 0) {
@@ -142,8 +152,9 @@ export default {
             }
           }).then(res => {
             this.userInfo = res.data
-            console.log(res,'信息')
+            // console.log(res,'信息')
             if(!this.userInfo.isAddress) {
+              // console.log(this.userInfo)
               this.toPage('/self/myAddress', '请先添加收货地址')
             } else if (!this.userInfo.isWechat) {
               this.toPage('/self/wx','请先添加微信收款信息')
@@ -159,6 +170,7 @@ export default {
       }
     },
     toPage(url, title) {
+      // console.log(url,title)
        // 未添加收款地址
         this.$dialog.confirm({
           title: '',
@@ -175,6 +187,7 @@ export default {
           this.$router.replace('/')
         });
     },
+    //当前页面接口
     onLoad() {
       this.$post({
         module: 'Nft',
@@ -184,14 +197,18 @@ export default {
           page: this.page
         }
       }).then(res => {
+        // console.log(res)
         this.loading = false
         this.lastId = res.data.lastId
+        // console.log(this.lastId)
         this.page ++
+        //循环页面的数组
         this.list.push(...res.data.list)
+        // console.log(this.list)
         if(this.page > res.data.lastPage) {
           this.finished = true
         }
-        console.log(res,'抢购场次')
+        // console.log(res,'抢购场次')
       })
     },
   },
@@ -212,7 +229,7 @@ export default {
   .box {
     width: 100%;
     padding: 10px 15px;
-    // background-color: #333333;
+     //background-color: #fff;
     // height: 100vh;
     /deep/.van-notice-bar__content {
       color: #999999;
