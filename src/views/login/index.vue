@@ -24,6 +24,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {login} from "@/api/login";
+
 export default {
   data() {
     return {
@@ -43,13 +45,17 @@ export default {
       }
       this.loginShow = true
       this.disabled = true
-      this.$post({
-        module: 'Account',
-        interface: '1000',
-        data: {
-          account: this.mobile,
-          password: this.password,
-        }
+      // this.$post({
+      //   module: 'Account',
+      //   interface: '1000',
+      //   data: {
+      //     account: this.mobile,
+      //     password: this.password,
+      //   }
+      // })
+      login({
+        account: this.mobile,
+        password: this.password
       }).then(res => {
         this.loginShow = false
         localStorage.setItem('USER_MODILE', this.mobile)

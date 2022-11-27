@@ -5,13 +5,14 @@ module.exports = {
   lintOnSave:false,//关闭eslintre语法检查
   devServer: {
     proxy: {
-      "/api": {
+      [process.env.VUE_APP_BASE_API]: {
         // 如果需要使用正式地址测试，请将此处地址改为正式地址
-        target: 'https://www.apis.xianqujingpin.com',
+        // target: 'https://www.apis.xianqujingpin.com',
+        target: 'http://47.98.56.192',
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          "^/api": "/"
+          // ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       }
     }

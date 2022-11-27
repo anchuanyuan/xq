@@ -172,21 +172,3 @@ export function post(params) {
   });
 }
 
-// 二进制不需要加密
-export function upload(params) {
-  store.state.isLoadding = true
-  let formData = new FormData();
-  formData.append("file", params);
-
-  return new Promise((resolve, reject) => {
-    axios.post('/upload', formData)
-      .then(res => {
-        store.state.isLoadding = false
-        resolve(res);
-      })
-      .catch(err => {
-        store.state.isLoadding = false
-        reject(err)
-      })
-  });
-}
