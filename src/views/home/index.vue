@@ -96,6 +96,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {getBannerList} from "@/api/home";
+
 export default {
   data() {
     return {
@@ -182,12 +184,9 @@ export default {
       }
     },
     getBanner() {
-      this.$post({
-        module: 'Content',
-        interface: '1000',
-      }).then(res => {
+      getBannerList().then(res => {
         // console.log(res,'广告图列表')
-        this.bannerList = res.data.list
+        this.bannerList = res.list
       })
     },
     getclassifyList() {
