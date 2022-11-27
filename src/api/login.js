@@ -3,7 +3,7 @@ import request from '@/utils/request.js'
 // 登录方法
 export function login(data) {
   return request({
-    url: '/shopUser/login',
+    url: '/login/login',
     headers: {
       isToken: false
     },
@@ -24,3 +24,15 @@ export function register(data) {
   })
 }
 
+
+// 获取验证码
+export function getCode(data) {
+  return request({
+    url: 'common/sendCode',
+    headers: {
+      isToken: false
+    },
+    method: 'post',
+    data: data
+  })
+}
