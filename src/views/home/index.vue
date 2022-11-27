@@ -1,35 +1,41 @@
 <template>
-  <div class="container">
-    <div class="kuan">
-      <div class="heder_top">
-        <img src="../../picture/形状 4.png" alt="">
-        <p>首页</p>
-      </div>
-      <div class="input">
-        <img src="../../picture/放大镜.png" alt="">
-        <input type="text" placeholder="搜索关键字">
-      </div>
-      <div class="advertise" >
-
-
-        <!-- <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+    <div class="container">
+        <div class="kuan">
+            <div class="heder_top">
+                <img src="../../picture/形状 4.png" alt="" />
+                <p>首页</p>
+            </div>
+            <div class="input">
+                <img src="../../picture/放大镜.png" alt="" />
+                <input type="text" placeholder="搜索关键字" />
+            </div>
+            <div class="advertise">
+                <!-- <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
           <van-swipe-item><img src="../../picture/组 3 拷贝.png" alt=""></van-swipe-item>
           <van-swipe-item>2</van-swipe-item>
           <van-swipe-item>3</van-swipe-item>
           <van-swipe-item>4</van-swipe-item>
         </van-swipe> -->
 
-<!--        轮播图-->
-        <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" style="border-radius: 15px;">
-          <van-swipe-item v-for="(item,index) in bannerList" :key="index">
-            <img class="img" :src="item.src" alt="">
-            <!-- <img src="../../picture/组 3 拷贝.png" alt=""> -->
-          </van-swipe-item>
-        </van-swipe>
-      </div>
+                <!--        轮播图-->
+                <van-swipe
+                    class="my-swipe"
+                    :autoplay="3000"
+                    indicator-color="white"
+                    style="border-radius: 15px"
+                >
+                    <van-swipe-item
+                        v-for="(item, index) in bannerList"
+                        :key="index"
+                    >
+                        <img class="img" :src="item.src" alt="" />
+                        <!-- <img src="../../picture/组 3 拷贝.png" alt=""> -->
+                    </van-swipe-item>
+                </van-swipe>
+            </div>
 
-      <!-- 热门分类 -->
-      <!-- <div class="all_title flex-column flex-center">
+            <!-- 热门分类 -->
+            <!-- <div class="all_title flex-column flex-center">
       <div class="all_title_top flex-center">
         <img src="../../assets/img/home/zhaugnshi.png" alt="">
         <div>热门分类</div>
@@ -44,8 +50,8 @@
         <div class="title">{{ item.name }}</div>
       </div>
     </div> -->
-      <!-- 更多精选 -->
-      <!-- <div class="all_title flex-column flex-center">
+            <!-- 更多精选 -->
+            <!-- <div class="all_title flex-column flex-center">
       <div class="all_title_top flex-center">
         <img src="../../assets/img/home/zhaugnshi.png" alt="">
         <div>更多精选</div>
@@ -54,7 +60,7 @@
       <p>MORE SELECTIONS</p>
     </div> -->
 
-      <!-- <div class="center_good">
+            <!-- <div class="center_good">
       <img src="../../assets/img/home/sb.jpg" alt="">
       <div class="good_name flex-column flex-around">
         <div class="name">KAWS｜解剖同伴：积木熊 紅、黑、灰</div>
@@ -65,38 +71,54 @@
         </div>
       </div>
     </div> -->
-      <div class="text">
-        <div class="text-color">........ 爆款 ........</div>
-      </div>
-      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <div class="good_list">
-          <div class="good_list_item" @click="$router.push('/home/details?id=' + item.id)" v-for="(item,index) in list"
-            :key="index">
-              <div class="good_list_item_tu"><img :src="item.cover" alt=""></div>
-              <p class="name">{{ item.name }}</p>
-              <div class="good_list_item_img">
-                <div class="text-top">
-                  <p class="perice">￥ </p><p class="perices">{{ parseInt(Number(item.price)) }}</p>
+            <div class="text">
+                <div class="text-color">........ 爆款 ........</div>
+            </div>
+            <van-list
+                v-model="loading"
+                :finished="finished"
+                finished-text="没有更多了"
+                @load="onLoad"
+            >
+                <div class="good_list">
+                    <div
+                        class="good_list_item"
+                        @click="$router.push('/home/details?id=' + item.id)"
+                        v-for="(item, index) in list"
+                        :key="index"
+                    >
+                        <div class="good_list_item_tu">
+                            <img :src="item.cover" alt="" />
+                        </div>
+                        <p class="name">{{ item.name }}</p>
+                        <div class="good_list_item_img">
+                            <div class="text-top">
+                                <p class="perice">￥</p>
+                                <p class="perices">
+                                    {{ parseInt(Number(item.price)) }}
+                                </p>
+                            </div>
+                            <img
+                                src="../../picture/jian1.png"
+                                alt=""
+                                class="img1"
+                            />
+                        </div>
+                    </div>
                 </div>
-                <img src="../../picture/jian1.png" alt="" class="img1">
-              </div>
-          </div>
-        </div>
-      </van-list>
+            </van-list>
 
-      <!-- <van-popup v-model="show" round closeable @close="closePup">
+            <!-- <van-popup v-model="show" round closeable @close="closePup">
         <div v-if="popupInfo.desc" class="text"> {{ popupInfo.desc }}</div>
         <img v-if="popupInfo.img" :src="popupInfo.img" alt="">
         <van-checkbox icon-size="14px" checked-color="#fc3d42"  v-model="checked">今日不在弹出</van-checkbox>
       </van-popup> -->
-
+        </div>
     </div>
-
-  </div>
 </template>
 
 <script type="text/ecmascript-6">
-import {getBannerList} from "@/api/home";
+import {getswiperlist} from "@/api/home";
 
 export default {
   data() {
@@ -183,9 +205,11 @@ export default {
         })
       }
     },
+    // 获取轮播图列表
     getBanner() {
-      getBannerList().then(res => {
-        // console.log(res,'广告图列表')
+       getswiperlist().then(res => {
+        console.log(res,'广告图列表')
+        console.log(111);
         this.bannerList = res.list
       })
     },
@@ -193,7 +217,8 @@ export default {
       this.$post({
         module: 'Good',
         interface: '1000',
-      }).then(res => {
+      })
+      .then(res => {
         // console.log(res,'热门分类')
         this.classifyList = res.data
       })
@@ -235,363 +260,361 @@ export default {
 </script>
 
 <style scoped lang="less">
-.text-top{
-  display: flex;
+.text-top {
+    display: flex;
 }
-.list{
-  width: 100%;
-  height: 200px;
-  background-color: #0ABB75;
+.list {
+    width: 100%;
+    height: 200px;
+    background-color: #0abb75;
 }
-.text{
-  width: 100%;
-  height: 50px;
-  //background-color: #1aa8fe;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #F6D692;
-  font-size: 24px;
+.text {
+    width: 100%;
+    height: 50px;
+    //background-color: #1aa8fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f6d692;
+    font-size: 24px;
 }
 .kuan {
-  width: 92%;
-  height: 100%;
-  margin: 0 auto;
+    width: 92%;
+    height: 100%;
+    margin: 0 auto;
 }
 
 .container {
-  width: 100vw;
-  background-image: url(../../picture/backGround.png);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-
-  // background-attachment: fixed;
-  // height: 100vh;
-  .input {
-    width: 92%;
-    height: 30px;
-    margin: 0 auto;
-    background-color: #1B1B1B;
-    border-radius: 15px;
-    color: white;
-    display: flex;
-    margin-top: 20px;
-
-    // align-content: center;
-    img {
-      width: 18px;
-      height: 18px;
-      margin-left: 8px;
-      // vertical-align: middle;
-      margin-top: 6px;
-    }
-
-    input {
-      width: 100%;
-      margin-left: 8px;
-    }
-  }
-
-  .advertise {
-    width: 100%;
-    height: 160px;
-    margin-top: 45px;
-    margin-bottom: 10px;
-
-    // .my-swipe .van-swipe-item {
-    //   color: #fff;
-    //   font-size: 20px;
-    //   line-height: 150px;
-    //   text-align: center;
-    //   background-color: #39a9ed;
-    // }
-  }
-
-  .heder_top {
-    width: 100%;
-    height: 30px;
-    position: relative;
-    top: 0;
-    left: 0;
-    font-size: 18px;
-    font-weight: 400;
-    z-index: 9999 !important;
-    color: #FFFFFF;
-    margin-top: 15px;
-    // text-align: center;
-    position: relative;
-
-    img {
-      width: 26px;
-      height: 26px;
-
-    }
-
-    p {
-      position: absolute;
-      top: 0px;
-      left: 10px;
-    }
-  }
-
-  .my-swipe {
-    margin-top: -30px;
-
-    .van-swipe-item {
-      .img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-  }
-
-  .class_ification {
-    width: 100%;
-    // padding: 15px 10px 0 16px;
-    padding: 0 0px 0 10px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .class_item {
-      width: 84px;
-      height: 37px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding-left: 7px;
-      margin-right: 6px;
-      margin-top: 15px;
-
-      img {
-        width: 34px;
-        height: 34px;
-        position: absolute;
-        left: -4px;
-        bottom: 0px;
-        // z-index: 9;
-      }
-
-      .title {
-        width: 76px;
-        height: 21px;
-        font-size: 10px;
-        line-height: 21px;
-        padding: 0 4px 0 20px;
-        text-align: center;
-        border: 1px solid #000000;
-        border-radius: 11px;
-        color: #000000;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-    }
-  }
-
-  .center_good {
-    margin-top: 35px;
-    width: 100%;
-    height: 160px;
-    // background-image: url('../../assets/img/home/gezi.png');
+    width: 100vw;
+    background-image: url(../../picture/backGround.png);
     background-size: 100% 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #f4f1e8;
+    background-repeat: no-repeat;
 
-    img {
-      width: 150px;
-      height: 70px;
-      object-fit: cover;
-      margin-right: 10px;
-    }
-
-    .good_name {
-      width: 160px;
-      height: 85px;
-      background: rgba(#831616, 0.3);
-      color: #FFFFFF;
-      padding: 8px;
-      position: relative;
-
-      //.name {
-      //  overflow: hidden;
-      //  text-overflow: ellipsis;
-      //  display: -webkit-box;
-      //  -webkit-box-orient: vertical;
-      //  -webkit-line-clamp: 1;
-      //  // color: white;
-      //}
-
-      .red-line {
-        position: absolute;
-        bottom: -3px;
-        left: 0;
-
-        .line_one {
-          width: 94px;
-          height: 6px;
-          background: #921F1E;
-          margin-right: 10px;
-        }
-
-        .line_two {
-          width: 6px;
-          height: 6px;
-          background: #921F1E;
-        }
-      }
-    }
-  }
-
-  .good_list {
-    width: 100%;
-    //background-color: #0ABB75;
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: space-between;
-    .good_list_item {
-      // padding: 10px;
-      width: 32%;
-      height: 170px;
-      margin: 0 auto;
-      // text-align: center;
-      background-color: #1F1F1F;
-      border: 3px solid #F6D692;
-      margin-top: 10px;
-      border-radius: 5px;
-      // border-right: 1px solid #BFBFBF;
-      // border-bottom: 1px solid #BFBFBF;
-      .good_list_item_tu {
-        // width: 85%;
-        height: 105px;
+    // background-attachment: fixed;
+    // height: 100vh;
+    .input {
+        width: 92%;
+        height: 30px;
         margin: 0 auto;
-        border-bottom: 3px solid #F6D692;
-        // display: block;
-        // position: relative;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        img {
-          max-width: 85%;
-          max-height: 100%;
-          display: block;
-          margin: 0 auto;
-          // 裁剪
-          // object-fit: cover;
-
-          // position: absolute;
-          // top: center;
-          // left: center;
-          // right: center;
-          // bottom: center;
-        }
-      }
-
-      .name {
-        font-size: 15px;
-        //height: 45px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        padding-top: 10px;
-        margin-left: 9px;
-        margin-right: 5px;
-        font-size: 13px;
+        background-color: #1b1b1b;
+        border-radius: 15px;
         color: white;
-      }
+        display: flex;
+        margin-top: 20px;
 
+        // align-content: center;
+        img {
+            width: 18px;
+            height: 18px;
+            margin-left: 8px;
+            // vertical-align: middle;
+            margin-top: 6px;
+        }
 
-      .good_list_item_img {
+        input {
+            width: 100%;
+            margin-left: 8px;
+        }
+    }
+
+    .advertise {
+        width: 100%;
+        height: 160px;
+        margin-top: 45px;
+        margin-bottom: 10px;
+
+        // .my-swipe .van-swipe-item {
+        //   color: #fff;
+        //   font-size: 20px;
+        //   line-height: 150px;
+        //   text-align: center;
+        //   background-color: #39a9ed;
+        // }
+    }
+
+    .heder_top {
+        width: 100%;
+        height: 30px;
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 18px;
+        font-weight: 400;
+        z-index: 9999 !important;
+        color: #ffffff;
+        margin-top: 15px;
+        // text-align: center;
+        position: relative;
+
+        img {
+            width: 26px;
+            height: 26px;
+        }
+
+        p {
+            position: absolute;
+            top: 0px;
+            left: 10px;
+        }
+    }
+
+    .my-swipe {
+        margin-top: -30px;
+
+        .van-swipe-item {
+            .img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .class_ification {
+        width: 100%;
+        // padding: 15px 10px 0 16px;
+        padding: 0 0px 0 10px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .class_item {
+            width: 84px;
+            height: 37px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-left: 7px;
+            margin-right: 6px;
+            margin-top: 15px;
+
+            img {
+                width: 34px;
+                height: 34px;
+                position: absolute;
+                left: -4px;
+                bottom: 0px;
+                // z-index: 9;
+            }
+
+            .title {
+                width: 76px;
+                height: 21px;
+                font-size: 10px;
+                line-height: 21px;
+                padding: 0 4px 0 20px;
+                text-align: center;
+                border: 1px solid #000000;
+                border-radius: 11px;
+                color: #000000;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .center_good {
+        margin-top: 35px;
+        width: 100%;
+        height: 160px;
+        // background-image: url('../../assets/img/home/gezi.png');
+        background-size: 100% 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        background-color: #f4f1e8;
+
+        img {
+            width: 150px;
+            height: 70px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .good_name {
+            width: 160px;
+            height: 85px;
+            background: rgba(#831616, 0.3);
+            color: #ffffff;
+            padding: 8px;
+            position: relative;
+
+            //.name {
+            //  overflow: hidden;
+            //  text-overflow: ellipsis;
+            //  display: -webkit-box;
+            //  -webkit-box-orient: vertical;
+            //  -webkit-line-clamp: 1;
+            //  // color: white;
+            //}
+
+            .red-line {
+                position: absolute;
+                bottom: -3px;
+                left: 0;
+
+                .line_one {
+                    width: 94px;
+                    height: 6px;
+                    background: #921f1e;
+                    margin-right: 10px;
+                }
+
+                .line_two {
+                    width: 6px;
+                    height: 6px;
+                    background: #921f1e;
+                }
+            }
+        }
+    }
+
+    .good_list {
         width: 100%;
         //background-color: #0ABB75;
         display: flex;
-        margin-top: 6px;
-        //flex-direction: row;
-        //align-items: center;
+        flex-wrap: wrap;
         justify-content: space-between;
+        .good_list_item {
+            // padding: 10px;
+            width: 32%;
+            height: 170px;
+            margin: 0 auto;
+            // text-align: center;
+            background-color: #1f1f1f;
+            border: 3px solid #f6d692;
+            margin-top: 10px;
+            border-radius: 5px;
+            // border-right: 1px solid #BFBFBF;
+            // border-bottom: 1px solid #BFBFBF;
+            .good_list_item_tu {
+                // width: 85%;
+                height: 105px;
+                margin: 0 auto;
+                border-bottom: 3px solid #f6d692;
+                // display: block;
+                // position: relative;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                img {
+                    max-width: 85%;
+                    max-height: 100%;
+                    display: block;
+                    margin: 0 auto;
+                    // 裁剪
+                    // object-fit: cover;
 
-        .img1 {
-          width: 15px;
-          height: 15px;
-          vertical-align: middle;
-          margin-right: 4.5px;
+                    // position: absolute;
+                    // top: center;
+                    // left: center;
+                    // right: center;
+                    // bottom: center;
+                }
+            }
+
+            .name {
+                font-size: 15px;
+                //height: 45px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                padding-top: 10px;
+                margin-left: 9px;
+                margin-right: 5px;
+                font-size: 13px;
+                color: white;
+            }
+
+            .good_list_item_img {
+                width: 100%;
+                //background-color: #0ABB75;
+                display: flex;
+                margin-top: 6px;
+                //flex-direction: row;
+                //align-items: center;
+                justify-content: space-between;
+
+                .img1 {
+                    width: 15px;
+                    height: 15px;
+                    vertical-align: middle;
+                    margin-right: 4.5px;
+                }
+
+                .perice {
+                    // padding-top: 10px;
+                    font-size: 10px;
+                    color: #f6d692;
+                    margin-left: 10px;
+                }
+                .perices {
+                    font-size: 15px;
+                    color: #f6d692;
+                }
+            }
+        }
+    }
+
+    .all_title {
+        margin-top: 40px;
+
+        .all_title_top {
+            > img {
+                width: 24px;
+                height: 24px;
+            }
+
+            > div {
+                width: 80px;
+                height: 27px;
+                background: #f4f1e8;
+                border: 1px solid #000000;
+                text-align: center;
+                line-height: 27px;
+                margin: 0 10px;
+            }
         }
 
-        .perice {
-          // padding-top: 10px;
-          font-size: 10px;
-          color: #F6D692;
-          margin-left: 10px;
+        > p {
+            font-size: 12px;
+            font-weight: 400;
+            color: #999999;
+            line-height: 24px;
+            padding-top: 5px;
         }
-        .perices{
-          font-size: 15px;
-          color: #F6D692;
-        }
-      }
     }
-  }
-
-  .all_title {
-    margin-top: 40px;
-
-    .all_title_top {
-      >img {
-        width: 24px;
-        height: 24px;
-      }
-
-      >div {
-        width: 80px;
-        height: 27px;
-        background: #F4F1E8;
-        border: 1px solid #000000;
-        text-align: center;
-        line-height: 27px;
-        margin: 0 10px;
-      }
-    }
-
-    >p {
-      font-size: 12px;
-      font-weight: 400;
-      color: #999999;
-      line-height: 24px;
-      padding-top: 5px;
-    }
-  }
 }
 
 .van-popup {
-  width: 80%;
-  min-height: 200px;
-  max-height: 600px;
-  padding: 40px 15px 30px;
+    width: 80%;
+    min-height: 200px;
+    max-height: 600px;
+    padding: 40px 15px 30px;
 
-  .text {
-    // text-align: center;
-    font-size: 14px;
-  }
-
-  img {
-    width: 100%;
-    height: 200px;
-  }
-
-  /deep/.van-checkbox {
-    position: absolute;
-    bottom: 3px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    .van-checkbox__label {
-      font-size: 12px;
+    .text {
+        // text-align: center;
+        font-size: 14px;
     }
-  }
+
+    img {
+        width: 100%;
+        height: 200px;
+    }
+
+    /deep/.van-checkbox {
+        position: absolute;
+        bottom: 3px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .van-checkbox__label {
+            font-size: 12px;
+        }
+    }
 }
 </style>
