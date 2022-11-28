@@ -4,6 +4,7 @@
     <div class="box">
       <h1>{{ content.title }}</h1>
         <div class="box_content" v-html="content.content"></div>
+      <div></div>s
       <!-- <p>时代维度商城上架品类资质名录</p>
       <br>
       <p>您当前浏览的为最新版本</p>
