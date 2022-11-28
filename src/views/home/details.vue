@@ -31,28 +31,31 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {goodDetail} from "@/api/home/goods";
+
 export default {
   data() {
     return {
-      id: '',
+      goodId: '',
       info: {}
     };
   },
   created() {
-    if(this.$route.query.id) {
-      this.id = this.$route.query.id
+    if(this.$route.query.goodId) {
+      this.goodId = this.$route.query.goodId
       this.getData()
     }
   },
   methods: {
     getData() {
-      this.$post({
+     /* this.$post({
         module: 'Good',
         interface: '1010',
         data: {
           id: this.id
         }
-      }).then(res => {
+      })*/
+      goodDetail(this.goodId).then(res => {
         // console.log(res,'商品详情')
         this.info = res.data
       })

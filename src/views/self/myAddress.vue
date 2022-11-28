@@ -27,6 +27,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {getAddress} from "@/api/my/addr";
+
 export default {
   data() {
     return {
@@ -38,10 +40,11 @@ export default {
   },
   methods: {
     getList() {
-      this.$post({
+     /* this.$post({
         module: 'Address',
         interface: '2000',
-      }).then(res => {
+      })*/
+      getAddress().then(res => {
         // console.log(res,'收货地址列表')
         this.list = res.data.list
       })

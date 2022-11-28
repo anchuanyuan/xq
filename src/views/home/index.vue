@@ -7,7 +7,7 @@
       </div>
       <div class="input">
         <img src="../../picture/放大镜.png" alt="">
-        <input type="text" placeholder="搜索关键字">
+        <input type="text" placeholder="搜索关键字" v-model="queryParams.goodName" @input="getListBySearch">
       </div>
       <div class="advertise" >
 
@@ -22,7 +22,7 @@
 <!--        轮播图-->
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" style="border-radius: 15px;">
           <van-swipe-item v-for="(item,index) in bannerList" :key="index">
-            <img class="img" :src="item.src" alt="">
+            <img class="img" :src="item.carouselImg" alt="">
             <!-- <img src="../../picture/组 3 拷贝.png" alt=""> -->
           </van-swipe-item>
         </van-swipe>
@@ -70,13 +70,13 @@
       </div>
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="good_list">
-          <div class="good_list_item" @click="$router.push('/home/details?id=' + item.id)" v-for="(item,index) in list"
+          <div class="good_list_item" @click="$router.push('/home/details?goodId=' + item.goodId)" v-for="(item,index) in list"
             :key="index">
-              <div class="good_list_item_tu"><img :src="item.cover" alt=""></div>
-              <p class="name">{{ item.name }}</p>
+              <div class="good_list_item_tu"><img :src="item.goodImg" alt=""></div>
+              <p class="name">{{ item.goodName }}</p>
               <div class="good_list_item_img">
                 <div class="text-top">
-                  <p class="perice">￥ </p><p class="perices">{{ parseInt(Number(item.price)) }}</p>
+                  <p class="perice">￥ </p><p class="perices">{{ parseInt(Number(item.goodPrice)) }}</p>
                 </div>
                 <img src="../../picture/jian1.png" alt="" class="img1">
               </div>
@@ -104,6 +104,7 @@ export default {
     return {
       list: [],
       loading: false,
+      keword:'',
       lastId: 0,
       page: 1,
       checked: false,
@@ -114,7 +115,8 @@ export default {
       classifyList: [],
       queryParams: {
         pageSize: 10,
-        pageNum: 1
+        pageNum: 1,
+        goodName: undefined
       },
       hotList: [
         {
@@ -178,6 +180,12 @@ export default {
         this.finished = true;
       }, 1000);
     },
+    onSearch () {
+
+    },
+    onCancel () {
+
+    },
     closePup() {
       // 设置当日不在弹窗
       if (this.checked) {
@@ -188,11 +196,17 @@ export default {
         })
       }
     },
+    getListBySearch () {
+      this.queryParams.pageNum = 1
+      goodsList(this.queryParams).then(res =>{
+        this.list = res.rows
+      })
+    },
     /*轮播图列表*/
     getBanner() {
       getBannerList().then(res => {
-        // console.log(res,'广告图列表')
-        this.bannerList = res.data.list
+        console.log(res,'广告图列表')
+        this.bannerList = res.data
       })
     },
     getclassifyList() {
@@ -463,7 +477,7 @@ export default {
       // padding: 10px;
       width: 32%;
       height: 170px;
-      margin: 0 auto;
+      //margin: 0 auto;
       // text-align: center;
       background-color: #1F1F1F;
       border: 3px solid #F6D692;
@@ -471,6 +485,9 @@ export default {
       border-radius: 5px;
       // border-right: 1px solid #BFBFBF;
       // border-bottom: 1px solid #BFBFBF;
+      &:last-child {
+        margin-right: auto!important;
+      }
       .good_list_item_tu {
         // width: 85%;
         height: 105px;
