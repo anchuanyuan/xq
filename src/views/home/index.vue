@@ -96,7 +96,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {getBannerList} from "@/api/home";
+import {getBannerList} from "@/api/home/home";
+import {goodsList} from "@/api/home/goods";
 
 export default {
   data() {
@@ -111,6 +112,10 @@ export default {
       show: false,
       finished: false,
       classifyList: [],
+      queryParams: {
+        pageSize: 10,
+        pageNum: 1
+      },
       hotList: [
         {
           img: require('../../assets/img/home/czsh.png'),
@@ -148,22 +153,22 @@ export default {
     };
   },
   methods: {
+    // 商品 列表
     onLoad() {
-      this.$post({
+      /*this.$post({
         module: 'Good',
         interface: '1005',
         data: {
           lastId: this.lastId,
           page: this.page
         }
-      }).then(res => {
+      })*/
+    goodsList(this.queryParams).then(res => {
         this.loading = false
-        // console.log(res,'数据列表')
-        this.page++
-        this.lastId = res.data.lastId
-        this.list.push(...res.data.list)
-        console.log(this.list)
-        if (this.page > res.data.lastPage) {
+        console.log(res,'数据列表')
+        this.queryParams.pageNum ++
+        this.list.push(...res.rows)
+        if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
           this.finished = true
         }
       })
@@ -183,10 +188,11 @@ export default {
         })
       }
     },
+    /*轮播图列表*/
     getBanner() {
       getBannerList().then(res => {
         // console.log(res,'广告图列表')
-        this.bannerList = res.list
+        this.bannerList = res.data.list
       })
     },
     getclassifyList() {
