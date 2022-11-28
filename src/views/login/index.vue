@@ -78,7 +78,7 @@ export default {
       // })
       // 调用登录接口
       login({
-        account: this.mobile,
+        userPhone:this.mobile,
         password: this.password
       }).then(res => {
         this.loginShow = false

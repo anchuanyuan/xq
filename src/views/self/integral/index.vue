@@ -40,6 +40,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {qucondetail} from "@/api/qucoin"
 export default {
   data() {
     return {
@@ -55,7 +56,7 @@ export default {
           url: '/self/integral/myPoints'
         },
         {
-          title: '兑换记录',
+          title: '转赠记录',
           img: require('../../../assets/img/self/duihuanjilu1.png'),
           url: '/self/integral/changeRecord'
 
@@ -76,19 +77,9 @@ export default {
     sumbit() {
       this.exShow = false
     },
+    //获得趣币详细
     getwalletList() {
-      this.$post({
-        module: 'Finance',
-        interface: '1001',
-        data: {
-          lastId:this.lastId,
-          page: this.page,
-          condition:{
-            creditType:"credit_2",
-            direction:'',
-            type:'0'
-          },
-        }
+      qucondetail({
       }).then(res => {
         console.log(res,'趣币信息')
         this.walletlist = res.data

@@ -22,7 +22,7 @@
 <!--        轮播图-->
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" style="border-radius: 15px;">
           <van-swipe-item v-for="(item,index) in bannerList" :key="index">
-            <img class="img" :src="item.src" alt="">
+            <img class="img" :src="item.carouselImg" alt="">
             <!-- <img src="../../picture/组 3 拷贝.png" alt=""> -->
           </van-swipe-item>
         </van-swipe>
@@ -96,8 +96,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {getBannerList} from "@/api/home/home";
-import {goodsList} from "@/api/home/goods";
+
+// import {goodsList} from "@/api/home/goods";
+import {getswiperlist} from "@/api/swiper";
 
 export default {
   data() {
@@ -163,20 +164,20 @@ export default {
           page: this.page
         }
       })*/
-    goodsList(this.queryParams).then(res => {
-        this.loading = false
-        console.log(res,'数据列表')
-        this.queryParams.pageNum ++
-        this.list.push(...res.rows)
-        if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
-          this.finished = true
-        }
-      })
-      setTimeout(() => {
-        // 加载状态结束
-        this.loading = false;
-        this.finished = true;
-      }, 1000);
+    // goodsList(this.queryParams).then(res => {
+    //     this.loading = false
+    //     console.log(res,'数据列表')
+    //     this.queryParams.pageNum ++
+    //     this.list.push(...res.rows)
+    //     if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
+    //       this.finished = true
+    //     }
+    //   })
+    //   setTimeout(() => {
+    //     // 加载状态结束
+    //     this.loading = false;
+    //     this.finished = true;
+    //   }, 1000);
     },
     closePup() {
       // 设置当日不在弹窗
@@ -190,9 +191,9 @@ export default {
     },
     /*轮播图列表*/
     getBanner() {
-      getBannerList().then(res => {
-        // console.log(res,'广告图列表')
-        this.bannerList = res.data.list
+      getswiperlist().then(res => {
+        console.log(res,'广告图列表')
+        this.bannerList = res.data
       })
     },
     getclassifyList() {

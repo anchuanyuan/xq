@@ -1,9 +1,9 @@
 import request from '@/utils/request.js'
 
-export function getswiperlist (params) {
+//获取轮播图列表
+export function getswiperlist () {
   return request({
     url: '/shopCarousel/list',
     method: 'get',
-    params
   })
 }

@@ -35,6 +35,7 @@
 
 <script type="text/ecmascript-6">
 import Header from '../../components/Header.vue';
+import { register,getCode} from "@/api/login";
 export default {
   data() {
     return {
@@ -67,33 +68,35 @@ export default {
       if(!this.invitation) return this.$toast('请输入邀请码')
       if(!this.checked) return this.$toast('请阅读并同意《用户需知》')
       this.reDisabled = true
-      this.$post({
-        module: 'Account',
-        interface: '1002',
-        data: {
-          account: this.mobile,
-          nickname: this.nickName,
-          captcha: this.code,
-          password: this.password,
-          recommend: this.invitation
-        }
-      }).then(() => {
+      //进行注册的接口调用
+        register({
+          data: {
+            code:this.code,
+            userAccount:this.mobile,
+            userCode:this.invitation,
+            userName:this.nickName,
+            userPassword:this.password,
+            userPhone:this.mobile
+          }
+        }).then(() => {
         this.reDisabled = false
         this.$toast('注册成功')
         this.$router.push('/login')
       }).catch(() => {
         this.reDisabled = false
       })
+
     },
+    //发送验证码
     onCaptBtn() {
-      if(!this.mobile) return this.$toast('请输入手机号')
-      this.$post({
-        module: "Account",
-        interface: "1001",
-        data: {
-          account: this.mobile,
-        },
-      }).then(() => {
+      if(!this.mobile)
+        return this.$toast('请输入手机号')
+      //请求验证码的接口
+       getCode({
+         data: {
+           phone : this.mobile,
+         }
+       }).then(() => {
         this.$toast('发送成功')
         let time = 60;
         let timer = setInterval(() => {

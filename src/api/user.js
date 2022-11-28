@@ -1,9 +1,10 @@
 import request from '@/utils/request.js'
 
 // 登录方法
-export function getBannerList() {
+export function getuserlist () {
     return request({
-        url: '/shopCarousel/list',
+        url: '/shopUser',
         method: 'get',
+
     })
 }
