@@ -25,14 +25,14 @@
       <!-- <div @click="pageShow = false" :class="{'selectDiv' : pageActive > 10 }">刷新</div> -->
     </div>
       <div class="good_list">
-        <div class="good_list_item" @click="goDetails(item.isSell,item.id )" v-for="(item,index) in list" :key="index">
+        <div class="good_list_item" @click="goDetails(item.isSell,item.robGoodId,item)" v-for="(item,index) in list" :key="index">
             <div class="img_box">
               <div class="isSell" v-if="item.isSell == 1"><img src="../../picture/soldOut.png" alt="" class="img"></div>
-              <img :src="item.nftCover" alt="">
+              <img :src="item.robGoodImg" alt="">
             </div>
-            <div class="name">{{ item.nftName }}</div>
+            <div class="name">{{ item.robGoodName }}</div>
             <div class="buy_box">
-              <p class="perice">￥{{parseInt(Number(item.price))}}</p>
+              <p class="perice">￥{{parseInt(Number(item.robGoodCode))}}</p>
               <van-button type="default">立即抢购</van-button>
             </div>
         </div>
@@ -51,6 +51,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {pagelist, getSelllist} from "@/api/rush/page"
 export default {
   data() {
     return {
@@ -98,55 +99,75 @@ export default {
     };
   },
   methods: {
+    getSelllists(){
+      getSelllist().then(res=>{
+        console.log(res,'上架列表')
+      })
+    },
     submit() {
       
     },
-    change() {
-      this.getPriceList()
-      this.lastId = 0
-      this.page = 1
-      this.list = []
-      this.activeIndex = ''
-      this.pageActive = ''
-      this.begin = 0
-      this.end = 0
-      this.getList()
-    },
+    // change() {
+    //   this.getPriceList()
+    //   this.lastId = 0
+    //   this.page = 1
+    //   this.list = []
+    //   this.activeIndex = ''
+    //   this.pageActive = ''
+    //   this.begin = 0
+    //   this.end = 0
+    //   this.getList()
+    // },
+    //点击立即抢购
     goDetails(sell,id) {
       if(sell == 1) return this.$toast('已售罄')
       this.$router.push('/rush/goodDetails?id=' + id)
     },
-    getPriceList() {
-      this.$post({
-        module: 'Nft',
-        interface: '1020',
-        data: {
-          type: this.active
-        }
-      }).then(res => {
-        this.periceList = res.data
-        // console.log(res,'价格区间')
-      })
-    },
+
+    // getPriceList() {
+    //   this.$post({
+    //     module: 'Nft',
+    //     interface: '1020',
+    //     data: {
+    //       type: this.active
+    //     }
+    //   }).then(res => {
+    //     console.log(res)
+    //     this.periceList = res.data
+    //     // console.log(res,'价格区间')
+    //   })
+    // },
     //狂欢场页面渲染接口
     getList() {
-      this.$post({
-        module: 'Nft',
-        interface: '1015',
-        data: {
-          sceneId:this.id,
-          lastId: this.lastId,
-          page: this.page,
-          // type: this.active,
-          begin: this.begin,
-          end: this.end,
-          time: new Date().getTime()
-        }
+      // this.$post({
+      //   module: 'Nft',
+      //   interface: '1015',
+      //   data: {
+      //     sceneId:this.id,
+      //     lastId: this.lastId,
+      //     page: this.page,
+      //     // type: this.active,
+      //     begin: this.begin,
+      //     end: this.end,
+      //     time: new Date().getTime()
+      //   }
+      // })
+      pagelist({
+
+        sceneId:this.id,
+        lastId: this.lastId,
+        page: this.page,
+        type: this.active,
+        begin: this.begin,
+        end: this.end,
+        time: new Date().getTime()
       }).then(res => {
-        // console.log(res)
+        console.log(res,'数据')
         this.lastId = res.data.lastId
-        this.list = res.data.list
+        this.list = res.data.goodMap
+        console.log(this.list)
         this.pageNum = res.data.lastPage
+        // console.log(this.pageNum)
         if(this.pageNum < 10) this.pageNum = 8
         // console.log(res,'抢购数据')
       })
@@ -174,8 +195,9 @@ export default {
       this.id = this.$route.query.id
       this.title = this.$route.query.title
     }
-    this.getPriceList()
+    // this.getPriceList()
     this.getList()
+    this.getSelllists()
   },
 };
 </script>

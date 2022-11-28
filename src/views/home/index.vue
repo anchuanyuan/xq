@@ -97,7 +97,8 @@
 
 <script type="text/ecmascript-6">
 import {getBannerList} from "@/api/home/home";
-import {goodsList} from "@/api/home/goods";
+import {goodsList} from "@/api/home/goodslist"
+// import {goodsList} from "@/api/home/goods";
 
 export default {
   data() {

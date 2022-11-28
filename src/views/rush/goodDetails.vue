@@ -37,6 +37,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {getByid} from "@/api/rush/page"
 export default {
   data() {
     return {
@@ -71,14 +72,17 @@ export default {
 
     //抢购商品详情渲染数据接口
     getInfo() {
-      this.$post({
-        module: 'Nft',
-        interface: '1025',
-        data: {
-          id: this.id
-        }
+      // this.$post({
+      //   module: 'Nft',
+      //   interface: '1025',
+      //   data: {
+      //     id: this.id
+      //   }
+      // })
+      getByid({
+        id: this.id
       }).then(res => {
-        // console.log(res,'商品详情')
+        console.log(res,'商品详情')
         this.info = res.data
       })
     },

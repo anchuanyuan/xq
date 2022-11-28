@@ -14,12 +14,12 @@
         :finished="finished"
         finished-text="暂无更多场次"
         @load="onLoad"
-        :immediate-check="false"
       >
        <!-- :style="`background-image: url(${item.background})`"  -->
-        <div v-for="(item,index) in list" :style="`background-image: url(${item.background})`" :key="index" class="box_image" @click="toGoods(item.id, item.name)">
+        <div v-for="(item,index) in list" :style="`background-image: url(${item.siteImg})`" :key="index" class="box_image" @click="$router.push('/rush/good?id=' + item.siteId +'&title='+ item.siteName)">
           <div class="time">
-          {{ item.beginTime }} - <span>{{ item.endTime }}</span> 
+<!--            开始时间和结束时间-->
+          {{ item.startHour }}:{{item.startMinute}} - <span>{{ item.endHour }}:{{item.endMinute}}</span>
           </div>
           <!-- <div class="desc" v-html="item.desc">
             {{ item.desc }}
@@ -27,7 +27,7 @@
           <!-- <div class="name">
             {{ item.name }}
           </div> -->
-          <img :src="item.backgroud" alt="">
+<!--          <img :src="item.backgroud" alt="">-->
         </div>
       </van-list>
     </div>
@@ -35,9 +35,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {goodlist} from "@/api/rush"
-// import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:8090"
+import {rushlist} from "@/api/rush/rushlist"
+
 export default {
   data() {
     return {
@@ -50,6 +49,10 @@ export default {
       finished: false,
       lastId: 0,
       page: 1,
+      queryParams: {
+        pageSize: 10,
+        pageNum: 1
+      },
       userInfo: {}
     };
   },
@@ -86,30 +89,31 @@ export default {
       }).then(res => {
         this.userInfo = res.data
         // console.log(this.userInfo)
-        // console.log(res,'信息')
+        console.log(res,'信息')
       })
     },
-    toGoods(id,title) {
-      //点击每个模块的id和每个模块的名字
-      // console.log(id)
-      // console.log(title)
-      this.$post({
-        module: 'Nft',
-        interface: '1001',
-        data: {
-          sceneId: id
-        }
-      }).then(() => {
-        //点击每个模块跳转到相应的模块地址栏显示id和title
-        this.$router.replace({
-          path: '/rush/good',
-          query: {
-            id,
-            title
-          }
-        })
-      })
-    },
+
+    // toGoods(id,title) {
+    //   //点击每个模块的id和每个模块的名字
+    //   console.log(id)
+    //   console.log(title)
+    //   // this.$post({
+    //   //   module: 'Nft',
+    //   //   interface: '1001',
+    //   //   data: {
+    //   //     sceneId: id
+    //   //   }
+    //   // }).then(()=> {
+    //     //点击每个模块跳转到相应的模块地址栏显示id和title
+    //     this.$router.replace({
+    //       path: '/rush/good',
+    //       query: {
+    //         id,
+    //         title
+    //       }
+    //     })
+    //   // })
+    // },
     //用户信息接口
     payDeposit(){
       this.$post({
@@ -172,6 +176,8 @@ export default {
         }
       }
     },
+
+
     toPage(url, title) {
       // console.log(url,title)
        // 未添加收款地址
@@ -190,8 +196,27 @@ export default {
           this.$router.replace('/')
         });
     },
+
+
+
     //当前页面接口
     onLoad() {
+      rushlist(this.queryParams).then(res => {
+        this.loading = false
+        console.log(res,'抢购场次')
+        //渲染接口siteId
+        this.list = res.data
+        this.queryParams.pageNum ++
+        // this.list.push(...res.rows)
+        if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
+          this.finished = true
+        }
+      })
+      setTimeout(() => {
+        // 加载状态结束
+        this.loading = false;
+        this.finished = true;
+      }, 1000);
       // this.$post({
       //   module: 'Nft',
       //   interface: '1000',
@@ -200,23 +225,23 @@ export default {
       //     page: this.page
       //   }
       // })
-      goodlist({
-        lastId: this.lastId,
-        page: this.page
-      }).then(res => {
-        console.log(res)
-        this.loading = false
-        this.lastId = res.data.lastId
-        // console.log(this.lastId)
-        this.page ++
-        //循环页面的数组
-        this.list.push(...res.data.list)
-        // console.log(this.list)
-        if(this.page > res.data.lastPage) {
-          this.finished = true
-        }
-        // console.log(res,'抢购场次')
-      })
+    //   goodlist({
+    //     lastId: this.lastId,
+    //     page: this.page
+    //   }).then(res => {
+    //     console.log(res)
+    //     this.loading = false
+    //     this.lastId = res.data.lastId
+    //     // console.log(this.lastId)
+    //     this.page ++
+    //     //循环页面的数组
+    //     this.list.push(...res.data.list)
+    //     // console.log(this.list)
+    //     if(this.page > res.data.lastPage) {
+    //       this.finished = true
+    //     }
+    //     // console.log(res,'抢购场次')
+    //   })
     },
   },
   components: {},
