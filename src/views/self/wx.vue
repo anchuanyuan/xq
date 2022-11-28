@@ -32,6 +32,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {userBankList} from "@/api/my/userBank";
+
 export default {
   data() {
     return {
@@ -74,13 +76,14 @@ export default {
     },
     // 查询当前绑定信息
     getDetails(){
-      this.$post({
+      /*this.$post({
         module: 'Finance',
         interface: '7002',
         data: {
           type: '1',
         }
-      }).then(res => {
+      })*/
+      userBankList(2).then(res => {
         // 通过账户名称是为为空  判断当前是否已完成绑定
         if(res.data.accountName){
           //  state 用来判断 输入框是否为只读状态

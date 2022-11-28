@@ -26,6 +26,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {addBank, userBankList} from "@/api/my/userBank";
+
 export default {
   data() {
     return {
@@ -42,7 +44,7 @@ export default {
       if(!this.name) return this.$toast('请输入姓名')
       if(!this.bankNo) return this.$toast('请输入银行卡号')
       if(!this.bankCardNo) return this.$toast('请输入开户行名称')
-      this.$post({
+      /*this.$post({
         module: 'Payment',
         interface: '1001',
         data: {
@@ -50,6 +52,11 @@ export default {
           cardNo: this.bankNo,
           bankSubbranch: this.bankCardNo
         }
+      })*/
+      addBank({
+        bankType: 1, // 收款类型 0:支付宝 1:银行卡 2:微信，
+        bankNumber:this.bankNo,
+        // bankImg:
       }).then(res => {
         console.log(res)
         this.show = false
@@ -58,12 +65,13 @@ export default {
       })
     },
     getData() {
-      this.$post({
+      /*this.$post({
         module: 'Payment',
         interface: '1000',
         data: {
         }
-      }).then(res => {
+      })*/
+      userBankList(1).then(res => {
         // console.log(res,'银行卡列表')
         if(res.data.list.length < 1) {
           this.btnShow = true
