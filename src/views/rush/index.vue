@@ -35,6 +35,9 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {goodlist} from "@/api/rush"
+// import axios from "axios";
+// axios.defaults.baseURL = "http://localhost:8090"
 export default {
   data() {
     return {
@@ -189,15 +192,19 @@ export default {
     },
     //当前页面接口
     onLoad() {
-      this.$post({
-        module: 'Nft',
-        interface: '1000',
-        data: {
-          lastId: this.lastId,
-          page: this.page
-        }
+      // this.$post({
+      //   module: 'Nft',
+      //   interface: '1000',
+      //   data: {
+      //     lastId: this.lastId,
+      //     page: this.page
+      //   }
+      // })
+      goodlist({
+        lastId: this.lastId,
+        page: this.page
       }).then(res => {
-        // console.log(res)
+        console.log(res)
         this.loading = false
         this.lastId = res.data.lastId
         // console.log(this.lastId)
