@@ -66,6 +66,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {delShopCart, shopCartList} from "@/api/shopcar/shopcar";
+
 export default {
   data() {
     return {
@@ -79,6 +81,10 @@ export default {
       lastId: 0,
       page: 1,
       num: 1,
+      queryParams: {
+        pageSize: 10,
+        pageNum: 1,
+      },
       info:{}
     };
   },
@@ -111,20 +117,20 @@ export default {
       // this.num = num
     },
     onLoad() {
-      this.$post({
+      /*this.$post({
         module: 'Good',
         interface: '1035',
         data: {
           lastId: this.lastId,
           page: this.page
         }
-      }).then(res => {
-        // console.log(res)
+      })*/
+      shopCartList(this.queryParams).then(res => {
+        console.log(res,'购物传列表')
         this.loading = false
-        this.lastId = res.data.lastId
-        this.page ++
+        this.queryParams.pageNum ++
         this.list.push(...res.data.list)
-        if(this.page > res.data.lastPage) {
+        if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
           this.finished = true
         }
       })
@@ -132,8 +138,7 @@ export default {
     getStart() {
       this.finished = false
       this.loading = false
-      this.lastId = 0
-      this.page = 1
+      this.queryParams.pageNum = 1
       this.list = []
     },
     delCartGoods(id) {
@@ -145,13 +150,14 @@ export default {
         })
         .then(() => {
           // on confirm
-          this.$post({
+         /* this.$post({
             module: 'Good',
             interface: '1040',
             data: {
               ids: [id]
             }
-          }).then(res => {
+          })*/
+          delShopCart({}).then(res => {
             this.$toast(res.message)
             this.getStart()
             // console.log(res)

@@ -29,6 +29,7 @@
 
 <script type="text/ecmascript-6">
 import Header from '../../components/Header.vue';
+import {sendCode} from "@/api/register";
 export default {
   data() {
     return {
@@ -47,13 +48,14 @@ export default {
     // 获取验证码
     onCaptBtn() {
       if(!this.mobile) return this.$toast('请输入手机号')
-      this.$post({
+      /*this.$post({
         module: "Account",
         interface: "1003",
         data: {
           account: this.mobile,
         },
-      }).then(() => {
+      })*/
+      sendCode({phone: this.mobile}).then(() => {
         this.$toast('发送成功')
         let time = 60;
         let timer = setInterval(() => {

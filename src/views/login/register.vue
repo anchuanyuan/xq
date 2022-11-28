@@ -35,16 +35,18 @@
 
 <script type="text/ecmascript-6">
 import Header from '../../components/Header.vue';
+import {sendCode} from "@/api/register";
+import {register} from "@/api/login";
 export default {
   data() {
     return {
-      mobile:'',
-      nickName:'',
-      password: '',
+      mobile:'17854301921',
+      nickName:'test01',
+      password: '123456',
       show: false,
       checked: '',
       code:'',
-      invitation: '',
+      invitation: 'abc',
       reDisabled: false,
       disabled: false,
       captBtnDisabled: false,
@@ -67,7 +69,7 @@ export default {
       if(!this.invitation) return this.$toast('请输入邀请码')
       if(!this.checked) return this.$toast('请阅读并同意《用户需知》')
       this.reDisabled = true
-      this.$post({
+      /*this.$post({
         module: 'Account',
         interface: '1002',
         data: {
@@ -77,6 +79,14 @@ export default {
           password: this.password,
           recommend: this.invitation
         }
+      })*/
+      register({
+        code:this.code,
+        userAccount: this.mobile,
+        userCode: this.invitation, // 邀请码
+        userName: this.nickName ,// 账号 (用户昵称?)
+        userPassword: this.password,
+        userPhone: this.mobile
       }).then(() => {
         this.reDisabled = false
         this.$toast('注册成功')
@@ -87,13 +97,14 @@ export default {
     },
     onCaptBtn() {
       if(!this.mobile) return this.$toast('请输入手机号')
-      this.$post({
+      /*this.$post({
         module: "Account",
         interface: "1001",
         data: {
           account: this.mobile,
         },
-      }).then(() => {
+      })*/
+      sendCode({phone: this.mobile}).then(() => {
         this.$toast('发送成功')
         let time = 60;
         let timer = setInterval(() => {

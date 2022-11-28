@@ -25,12 +25,13 @@
 
 <script type="text/ecmascript-6">
 import {login} from "@/api/login";
+import {encrypt} from "@/utils/jsencrypt";
 
 export default {
   data() {
     return {
-      mobile:'',
-      password: '',
+      mobile:'15555555555',
+      password: '123456',
       show: false,
       disabled: false,
       loginShow: false
@@ -54,8 +55,8 @@ export default {
       //   }
       // })
       login({
-        account: this.mobile,
-        password: this.password
+        userPhone: this.mobile,
+        password: encrypt(this.password)
       }).then(res => {
         this.loginShow = false
         localStorage.setItem('USER_MODILE', this.mobile)

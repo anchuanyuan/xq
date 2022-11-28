@@ -1,22 +1,21 @@
-// 地址
 import request from "@/utils/request.js";
 
-/* 地址详情*/
+/* 优惠券详情*/
 export function addressDetail(id) {
     return request({
         url: `/shopAddress/${id}`,
         method: 'get',
     })
 }
-/*我的地址列表*/
-export function getAddress() {
+/*我的优惠券列表*/
+export function shopGrantList() {
     return request({
-        url: `/shopAddress/getList`,
+        url: `/shopGrant/getList`,
         method: 'get',
     })
 }
 
-/* 添加地址 */
+/* 添加优惠券 */
 export function addAddress(data) {
     return request({
         url: `/shopAddress/insert`,
@@ -25,7 +24,7 @@ export function addAddress(data) {
     })
 }
 
-/* 删除地址 */
+/* 修改优惠券 */
 export function updateAddress(data) {
     return request({
         url: `/shopAddress/update`,
@@ -34,7 +33,7 @@ export function updateAddress(data) {
     })
 }
 
-/* 修改地址 */
+/* 修改优惠券 */
 export function delAddress(idList) {
     return request({
         url: `/shopAddress/${idList}`,

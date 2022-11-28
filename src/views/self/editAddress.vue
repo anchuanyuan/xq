@@ -28,6 +28,7 @@
 
 <script type="text/ecmascript-6">
 import { areaList } from "@vant/area-data";
+import {addressDetail, updateAddress} from "@/api/my/addr";
 export default {
   data() {
     return {
@@ -41,7 +42,7 @@ export default {
         city: '',
         county: "",
         areaText: '',
-        address: "",
+        addressName: "", // 收件人名称
         isDefault: false,
       },
       value: "",
@@ -52,16 +53,18 @@ export default {
       this.id = this.$route.query.id
       this.getAddress()
     }
+    this.getAddress() // todo delete
   },
   methods: {
     getAddress() {
-      this.$post({
+      /*this.$post({
         module: 'Address',
         interface: '2002',
         data: {
           id: this.id
         }
-      }).then(res => {
+      })*/
+      addressDetail(this.id || 1).then(res => {
         console.log(res, '收货地址详情')
         this.form = res.data
         this.form.province = String(this.form.province)
@@ -86,10 +89,13 @@ export default {
       // 是否为默认地址。1：默认地址；0：不默认
       this.form.isDefault ? this.form.isDefault = 1 : this.form.isDefault = 0
 
-      this.$post({
+      /*this.$post({
         module: 'Address',
         interface: this.id ? '2003' : '2001',
         data: this.form
+      })*/
+      updateAddress({
+        ...this.form
       }).then(res => {
         // console.log(res,'添加收货地址')
         this.$toast(res.message)
