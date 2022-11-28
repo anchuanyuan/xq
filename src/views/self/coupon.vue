@@ -39,12 +39,16 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {shopGrantList} from "@/api/my/coupon";
+
 export default {
   data() {
     return {
       couponList:[{}],
-      page: 1,
-      lastId: 0,
+      queryParams: {
+        pageSize: 10,
+        pageNum: 1,
+      },
       type:''
     };
   },
@@ -53,21 +57,24 @@ export default {
   },
   methods: {
     change() {
-      this.lastId = 0
-      this.page = 1
+      this.queryParams = 1
       this.getCouponList()
     },
     getCouponList(){
-      this.$post({
+      /*this.$post({
       module: 'Coupons',
       interface: '1000',
       data: {
         lastId: this.lastId,
         page: this.page,
       }
-    }).then(res => {
-      this.lastId = res.data.lastId
-      this.couponList = res.data.list
+    })*/
+      shopGrantList(this.queryParams).then(res => {
+        this.queryParams.pageNum ++
+        this.couponList = res.data.list
+        if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
+          this.finished = true
+        }
       console.log(JSON.stringify(res.data));
     })
     }

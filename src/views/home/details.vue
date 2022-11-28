@@ -3,21 +3,21 @@
     <Header isback title="商品详情"></Header>
     <div class="top_img">
       <van-swipe class="my-swipe" height="300" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item, index) in info.img" :key="index">
+        <van-swipe-item v-for="(item, index) in info.goodImg" :key="index">
           <img :src="item" alt="">
         </van-swipe-item>
       </van-swipe>
     </div>
     <div class="good_info">
-      <div class="name">{{ info.name }}</div>
+      <div class="name">{{ info.goodName }}</div>
       <p class="text">{{ info.seriesName }}</p>
       <div class="detail">
         <p>编号：{{ info.orderNo }}</p>
-        <p>价格： <span>￥{{ parseInt(Number(info.price)) }}</span></p>
+        <p>价格： <span>￥{{ parseInt(Number(info.goodPrice)) }}</span></p>
         <p>剩余数量： {{ info.surplus }}</p>
-        <p>上架时间：{{ info.createdAt }} </p>
+        <p>上架时间：{{ info.createDate }} </p>
         <p>商品详情</p>
-        <p class="good_details" v-html="info.desc"></p>
+        <p class="good_details" v-html="info.goodDescribe"></p>
       </div>
     </div>
     <div class="footer_btn">
@@ -31,40 +31,47 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {goodDetail} from "@/api/home/goods";
+import { shopCartAdd} from "@/api/shopcar/shopcar";
+
 export default {
   data() {
     return {
-      id: '',
+      goodId: '',
       info: {}
     };
   },
   created() {
-    if(this.$route.query.id) {
-      this.id = this.$route.query.id
+    if(this.$route.query.goodId) {
+      this.goodId = this.$route.query.goodId
       this.getData()
     }
   },
   methods: {
     getData() {
-      this.$post({
+     /* this.$post({
         module: 'Good',
         interface: '1010',
         data: {
           id: this.id
         }
-      }).then(res => {
+      })*/
+      goodDetail(this.goodId).then(res => {
         // console.log(res,'商品详情')
         this.info = res.data
       })
     },
     addCart() {
-      this.$post({
+      /*this.$post({
         module: 'Good',
         interface: '1030',
         data: {
           id:  this.info.id,
           num: 1
         }
+      })*/
+      shopCartAdd({
+        goodsId: this.goodId
       }).then(res => {
         this.$toast(res.message)
       })

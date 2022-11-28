@@ -13,14 +13,14 @@ export function login(data) {
 }
 
 // 注册方法
-export function register(data) {
+export function register(query) {
   return request({
     url: '/shopUser/insert',
     headers: {
-      isToken: false
+      isToken: false,
     },
     method: 'post',
-    data: data
+    params: query
   })
 }
 
