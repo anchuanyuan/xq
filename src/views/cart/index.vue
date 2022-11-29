@@ -129,10 +129,11 @@ export default {
         console.log(res,'购物传列表')
         this.loading = false
         this.queryParams.pageNum ++
-        this.list.push(...res.data.list)
-        if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
-          this.finished = true
-        }
+        this.list.push(...res.data)
+        this.finished = true
+        // if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
+        //   this.finished = true
+        // }
       })
     },
     getStart() {

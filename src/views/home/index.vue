@@ -96,8 +96,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {getBannerList} from "@/api/home/home";
-import {goodsList} from "@/api/home/goodslist"
+import {getswiperlist} from "@/api/swiper";
+import {goodsList} from "@/api/home/goods"
 // import {goodsList} from "@/api/home/goods";
 
 export default {
@@ -205,7 +205,7 @@ export default {
     },
     /*轮播图列表*/
     getBanner() {
-      getBannerList().then(res => {
+      getswiperlist().then(res => {
         console.log(res,'广告图列表')
         this.bannerList = res.data
       })

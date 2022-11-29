@@ -95,7 +95,8 @@ export default {
         data: this.form
       })*/
       updateAddress({
-        ...this.form
+        addressName: this.form.name,
+        addressDetail: this.form.address
       }).then(res => {
         // console.log(res,'添加收货地址')
         this.$toast(res.message)

@@ -40,7 +40,8 @@ import {register} from "@/api/login";
 export default {
   data() {
     return {
-      mobile:'17854301921',
+      // mobile:'17854301921',
+      mobile:'15650096884',
       nickName:'test01',
       password: '123456',
       show: false,

@@ -18,11 +18,12 @@
       <div class="title">收款二维码</div>
       <div class="pic">
           <van-uploader
-          :after-read="afterRead"
+          :before-read="beforeRead"
           v-model="fileList"
           multiple
           :max-count="1"
           preview-size="100px"
+          ref="upload"
         >
           <img class="upload_img" :src=imgUrl alt="" v-if="state" style="width:50%;">
           <img class="upload_img" src="@/assets/img/self/pic.png" alt="" v-else>
@@ -40,7 +41,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {userBankList} from "@/api/my/userBank";
+import {addBank, userBankList} from "@/api/my/userBank";
+import {upload} from "@/api/common";
 
 export default {
 data() {
@@ -64,7 +66,7 @@ methods: {
     if(!this.accountName) return this.$toast('请输入账户名称')
     if(!this.account) return this.$toast('请输入支付宝账号')
     if(!this.img) return this.$toast('请上传收款二维码')
-    this.$post({
+    /*this.$post({
       module: 'Finance',
       interface: '7001',
       data: {
@@ -73,6 +75,12 @@ methods: {
         account: this.account,
         pay_code: this.img
       }
+    })*/
+    addBank({
+      bankType: 0, // 收款类型 0:支付宝 1:银行卡 2:微信
+      bankImg: this.img, // 二维码
+      bankNumber : this.account, // 手机号
+      bankName: this.accountName //  用户名
     }).then(res => {
       this.$toast(res.message)
       this.getDetails()
@@ -105,10 +113,23 @@ methods: {
       }
     })
   },
-  afterRead(file) {
-    this.$upload(file.file).then(res => {
-        this.img = res.data.file
+  beforeRead (file) {
+    upload(file).then(res =>{
+      console.log(res)
+      this.fileList = [{
+        url: res.data
+      }]
+      this.img = res.data
     })
+  },
+  // afterRead(file) {
+  //   this.$upload(file.file).then(res => {
+  //   console.log(event)
+  //   upload(event.file).then(res =>{
+  //     console.log(res)
+  //   })
+  //       this.img = res.data.file
+  //   })
   },
   // 返回
   backPage(){

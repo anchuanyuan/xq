@@ -13,6 +13,9 @@ module.exports = {
         ws: true,
         pathRewrite: {
           // ['^' + process.env.VUE_APP_BASE_API]: ''
+        },
+        headers: {
+          Referer: 'https://4y09576317.zicp.fun'
         }
       }
     }
