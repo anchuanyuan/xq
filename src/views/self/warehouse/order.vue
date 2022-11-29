@@ -1,4 +1,5 @@
 <template>
+<!--  卖方仓库-->
   <div class="warehouse">
     <Header :title="title" isback />
     <!-- <van-tabs
@@ -24,7 +25,7 @@
             <div class="item-no">订单:{{ item.serialNo }}</div>
             <div class="item-status">{{ item.statusName }}</div>
           </div>
-          <div class="warehouse-name">所属仓库：{{ item.sceneName }}</div>
+          <div class="warehouse-name">所属仓库：{{ item.siteName }}</div>
           <div class="item-goods-list">
             <div class="goods-item">
               <img
@@ -96,9 +97,9 @@
     <van-popup v-model="show.payBox" position="center" class="pay-box-popup">
       <div class="pay-info-container">
         <div class="pay-info-cell">
-          <div class="cell-label">收 款 人 ：{{ bankInfo.bankUsername }}</div>
+          <div class="cell-label">收 款 人 ：{{ bankInfo.userName }}</div>
           <div class="cell-value">
-            <button class="copy-button" @click="copy(bankInfo.bankUsername)">复制</button>
+            <button class="copy-button" @click="copy(bankInfo.userName)">复制</button>
           </div>
         </div>
         <div class="pay-info-cell">
@@ -108,9 +109,9 @@
           </div>
         </div>
         <div class="pay-info-cell">
-          <div class="cell-label">开 户 行 ：{{ bankInfo.bankAddress }}</div>
+          <div class="cell-label">开 户 行 ：{{ bankInfo.bankName }}</div>
           <div class="cell-value">
-            <button class="copy-button"  @click="copy(bankInfo.bankAddress)">复制</button>
+            <button class="copy-button"  @click="copy(bankInfo.bankName)">复制</button>
           </div>
         </div>
         <div class="pay-info-cell">

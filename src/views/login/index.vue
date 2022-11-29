@@ -82,11 +82,12 @@ export default {
         password: this.password
       }).then(res => {
         this.loginShow = false
+        console.log(res)
         localStorage.setItem('USER_MODILE', this.mobile)
         this.disabled = false
         this.$toast('登陆成功')
         this.$router.push('/')
-        localStorage.setItem("token", res.data.accessToken);
+        localStorage.setItem("token", res.token);
       }).catch(() => {
         this.loginShow = false
         this.disabled = false

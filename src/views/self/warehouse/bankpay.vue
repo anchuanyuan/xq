@@ -21,7 +21,7 @@
             <div class="card" v-for="(item,index) in payTypeList" :key="index" @click="changePayType(index)">
                 <img :src=item.img2 alt="" v-if="payActive == index">
                 <img :src=item.img1 alt="" v-else>
-                <p class="text" :class="{textActive: payActive == index}">{{ item.name }}</p>
+                <p class="text" :class="{textActive: payActive == index}">{{ item.userName }}</p>
             </div>
         </div>
 

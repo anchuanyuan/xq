@@ -1,4 +1,5 @@
 <template>
+<!--  买方仓库-->
   <div class="warehouse">
     <Header :title="title" :url="toUrl" isback />
     <van-tabs
@@ -6,10 +7,11 @@
       background="transparent"
       title-active-color="#bda84f"
       title-inactive-color="#9B9B9B"
-      color="#0BBC74"
+      color="#bda84f"
       :swipe-threshold="6"
       @change="changeTab"
     >
+<!--      这里不需要变动循环死数据-->
       <van-tab
         v-for="item in tabList"
         :key="item.value"
@@ -22,18 +24,20 @@
         <div class="list-item" v-for="item in list" :key="item.id">
           <div class="item-header">
             <div class="item-no">订单:{{ item.serialNo }}</div>
+
             <div class="item-status">{{ item.statusName }}</div>
           </div>
-          <div class="warehouse-name">所属仓库：{{ item.sceneName }}</div>
+          <div class="warehouse-name">所属仓库：{{ item.siteName }}</div>
           <div class="item-goods-list">
             <div class="goods-item">
               <img
-                :src="item.nftCover"
+                :src="item.robGoodImg"
                 class="goods-icon"
               />
               <div class="goods-info">
+                         <!--标题-->
                 <div class="goods-title">{{ item.nftName }}</div>
-                <div class="goods-no">商品编号：{{ item.orderNo }}</div>
+                <div class="goods-no">商品编号：{{ item.robGoodCode }}</div>
                 <div class="goods-price">￥{{ parseInt(Number(item.price)) }}</div>
               </div>
             </div>
@@ -252,6 +256,7 @@ export default {
         }
       })
     },
+    //委托上架
     gotoPay(id){
        localStorage.setItem("id", id)
       this.timeNow = new Date().getHours();//取得当前时间的小时
