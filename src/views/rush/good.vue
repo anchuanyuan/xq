@@ -17,7 +17,7 @@
 
     <!-- <van-tabs line-width="125px" line-height="2px" @click="pageChange" @disabled="disabledChange" color="#000000" v-model="pageActive">
       <van-tab title="1页"  name="1"></van-tab>
-      <van-tab title="2页"  name="2"></van-tab>
+      <van-tab title="2页"  name="2"></van-tab>$router.push('/rush/goodDetails?robSellId=' + item.robGoodId +'&shopSiteId='+ item.robSellId +'&size='+ page+'&index='+1)
       <van-tab title="全部" name="del" disabled></van-tab>
     </van-tabs> -->
     <div class="tabList">
@@ -25,14 +25,14 @@
       <!-- <div @click="pageShow = false" :class="{'selectDiv' : pageActive > 10 }">刷新</div> -->
     </div>
       <div class="good_list">
-        <div class="good_list_item" @click="goDetails(item.isSell,item.robGoodId,item)" v-for="(item,index) in list" :key="index">
+        <div class="good_list_item" @click="jump(item,index)" v-for="(item,index) in list" :key="index">
             <div class="img_box">
               <div class="isSell" v-if="item.isSell == 1"><img src="../../picture/soldOut.png" alt="" class="img"></div>
               <img :src="item.robGoodImg" alt="">
             </div>
             <div class="name">{{ item.robGoodName }}</div>
             <div class="buy_box">
-              <p class="perice">￥{{parseInt(Number(item.robGoodCode))}}</p>
+              <p class="perice">￥{{parseInt(Number(item.price))}}</p>
               <van-button type="default">立即抢购</van-button>
             </div>
         </div>
@@ -59,6 +59,7 @@ export default {
       id: '',
       title:'',
       list: [],
+      pageLists:[],
       loading: false,
       finished: false,
       pageNum: 1, //数据总量
@@ -67,41 +68,58 @@ export default {
       begin: 0,
       end: 0,
       pageActive: '',
-      pageList: [
-        {
-          page: 1,
-          title: '1页'
-        },
-        {
-          page: 2,
-          title: '2页'
-        },
-        {
-          page: 3,
-          title: '3页'
-        },
-        {
-          page: 4,
-          title: '4页'
-        },
-        {
-          page: 5,
-          title: '5页'
-        },
-        {
-          page: 6,
-          title: '更多'
-        }
-      ],
+      //这是循环的页数
+      pageList: [],
+      //最大页数
+      pagebig:'',
       pageShow: false,
       activeIndex: '',
-      periceList: []
+      periceList: [],
+      gooddata:{},
+      //下标
+      goodindex:'',
+      //元素
+      gooditem:'',
+      //场次ID
+      robGoodId:'',
+      //商品ID
+      robSellId:'',
+      //页数
+      size:''
     };
   },
   methods: {
-    getSelllists(){
-      getSelllist().then(res=>{
-        console.log(res,'上架列表')
+    //跳转需要传的参数
+    //场次ID   robGoodId
+    jump(item,index){
+      // console.log(item,'元素')
+      this.gooditem = item
+      console.log(this.gooditem,'元素数')
+      //场次ID
+      this.robGoodId = this.gooditem.robGoodId
+      //商品ID
+      this.robSellId = this.gooditem.robSellId
+      this.size =this.page
+      // console.log(this.size,'页数')
+      // console.log(index,'下标')
+      this.goodindex = index
+      this.$router.push('/rush/goodDetails?robGoodId=' + this.robGoodId +'&robSellId='+ this.robSellId +'&size='+ this.size+'&index='+this.goodindex)
+      // console.log(this.goodindex,'下标数')
+    },
+    //获取页面渲染
+    getDatas(){
+      pagelist({
+        sceneId:this.id,
+      }).then(res=>{
+        console.log(res,'页数')
+        this.pagebig = res.data.page
+        console.log(this.pagebig,'最大页数')
+        for (var i=1;i<=this.pagebig;i++){   // eslint-disable-line no-unused-vars
+          if (i<=this.pagebig){   //eslint-disable-line no-unused-vars
+            this.pageList.push(i)
+            console.log(this.pageList,'循环的页数')
+          }
+        }
       })
     },
     submit() {
@@ -119,10 +137,10 @@ export default {
     //   this.getList()
     // },
     //点击立即抢购
-    goDetails(sell,id) {
-      if(sell == 1) return this.$toast('已售罄')
-      this.$router.push('/rush/goodDetails?id=' + id)
-    },
+    // goDetails(sell) {
+    //   if(sell == 1) return this.$toast('已售罄')
+    //   this.$router.push('/rush/goodDetails?robSellId=' + item.robGoodId +'&shopSiteId='+ this.id)
+    // },
 
     // getPriceList() {
     //   this.$post({
@@ -137,6 +155,10 @@ export default {
     //     // console.log(res,'价格区间')
     //   })
     // },
+    //获取商品基本信息
+    pagelists(){
+
+    },
     //狂欢场页面渲染接口
     getList() {
       // this.$post({
@@ -152,8 +174,8 @@ export default {
       //     time: new Date().getTime()
       //   }
       // })
-      pagelist({
-
+      //获取拍卖上架列表
+      getSelllist({
         sceneId:this.id,
         lastId: this.lastId,
         page: this.page,
@@ -162,10 +184,17 @@ export default {
         end: this.end,
         time: new Date().getTime()
       }).then(res => {
-        console.log(res,'数据')
+        console.log(res,'拍卖上架列表')
         this.lastId = res.data.lastId
-        this.list = res.data.goodMap
-        console.log(this.list)
+        this.list = res.data
+        // this.list.push(this.pageLists)
+        // var lists = this.list  // eslint-disable-line no-unused-vars
+        // var gooddata = this.pageLists  // eslint-disable-line no-unused-vars
+        // this.gooddata = this.pageLists
+        // console.log(this.gooddata,'基本信息')
+        // lists.push()
+        // console.log(lists)
+        // console.log(this.list)
         this.pageNum = res.data.lastPage
         // console.log(this.pageNum)
         if(this.pageNum < 10) this.pageNum = 8
@@ -178,15 +207,31 @@ export default {
       this.end = item.end
       this.getList()
     },
+    //点击切换页数
     pageChange(page,index) {
-      this.pageActive = index
-      this.page = page
-      this.getList()
+      pagelist({
+        sceneId:this.id,
+        lastId: this.lastId,
+        page: this.page,
+        type: this.active,
+        begin: this.begin,
+        end: this.end,
+        time: new Date().getTime()
+      }).then(res=>{
+        console.log(res,'商品基本信息')//打印出来是个对象
+        // this.pageLists = res.data.goodMap // eslint-disable-line no-unused-vars
+        this.pageActive = index
+        this.page = page
+        // alert(this.page)
+        this.getList()
+        // console.log(this.pageLists)
+      })
     },
     selectPage(item,index) {
       this.pageShow = false
       this.pageActive = index
       this.page = item
+      // alert(this.page)
       this.getList()
     },
   },
@@ -197,7 +242,9 @@ export default {
     }
     // this.getPriceList()
     this.getList()
-    this.getSelllists()
+    this.pagelists()
+    this.getDatas()
+    // this.getSelllists()
   },
 };
 </script>
