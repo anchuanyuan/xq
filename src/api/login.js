@@ -1,7 +1,7 @@
 import request from '@/utils/request.js'
 
 // 登录方法
-export function login(data) {
+export function login (data) {
   return request({
     url: '/login/login',
     headers: {
@@ -26,13 +26,37 @@ export function register(query) {
 
 
 // 获取验证码
-export function getCode(data) {
+export function getCode (data) {
   return request({
     url: 'common/sendCode',
     headers: {
       isToken: false
     },
     method: 'post',
-    data: data
+    data
+  })
+}
+// 忘记密码
+export function forgetpass (data) {
+  return request({
+    url: '/shopUser/resetPassWord',
+    method: 'post',
+    data
+  })
+}
+// 获取用户信息
+export function getuser (id) {
+  return request({
+    url: '/login/getInfo',
+    method: 'get',
+    data: id
+  })
+}
+// 退出登录
+export function exitlogin (id) {
+  return request({
+    url: '/login/getInfo',
+    method: 'get',
+    data: id
   })
 }

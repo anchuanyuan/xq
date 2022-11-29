@@ -11,6 +11,7 @@ const routes = [
   {
     path: "/",
     component: () => import("@/components/Foot"),
+    // component: () => import("@/views/login"),
     children: [
       {
         path: "/",

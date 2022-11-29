@@ -104,6 +104,7 @@ export default {
         this.getUserInfo()
       })
     },
+    // 获取用户信息
     getUserInfo() {
       this.$post({
         module: 'User',

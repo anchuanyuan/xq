@@ -29,7 +29,7 @@
 
 <script type="text/ecmascript-6">
 import Header from '../../components/Header.vue';
-import {sendCode} from "@/api/register";
+import {forgetpass, getCode} from "@/api/login";
 export default {
   data() {
     return {
@@ -48,14 +48,11 @@ export default {
     // 获取验证码
     onCaptBtn() {
       if(!this.mobile) return this.$toast('请输入手机号')
-      /*this.$post({
-        module: "Account",
-        interface: "1003",
+      getCode({
         data: {
-          account: this.mobile,
-        },
-      })*/
-      sendCode({phone: this.mobile}).then(() => {
+          phone : this.mobile,
+        }
+      }).then(() => {
         this.$toast('发送成功')
         let time = 60;
         let timer = setInterval(() => {
@@ -72,23 +69,19 @@ export default {
         }, 1000);
       });
     },
-    // 注册
+    // 进行忘记密码的接口提交
     submit() {
       if(!this.mobile) return this.$toast('请输入手机号')
       if(!this.code) return this.$toast('请输入验证码')
       if(!this.password) return this.$toast('请输入密码')
       if(this.password != this.safePassword) return this.$toast('两次输入密码不一致')
       this.disabled = true
-      this.$post({
-        module: 'Account',
-        interface: '1004',
-        data: {
-          account: this.mobile,
-          captcha: this.code,
-          password: this.password
-        }
-      }).then(() => {
-        // console.log(res)
+      //点击确定进行忘记密码的接口调用
+      forgetpass({
+        newPassWord:this.safePassword,
+        phone:this.mobile,
+      }).then((res) => {
+        console.log(res)
         this.disabled = false
         this.$toast('修改成功,去登录')
         this.$router.replace('/login')

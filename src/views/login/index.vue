@@ -25,7 +25,6 @@
 
 <script type="text/ecmascript-6">
 import {login} from "@/api/login";
-import {encrypt} from "@/utils/jsencrypt";
 
 export default {
   data() {

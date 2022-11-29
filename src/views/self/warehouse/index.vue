@@ -1,10 +1,10 @@
 <template>
   <div class="warehouse">
     <Header :title="title" :url="toUrl" isback />
-    <!-- <van-tabs
+    <van-tabs
       v-model="active"
       background="transparent"
-      title-active-color="#0BBC74"
+      title-active-color="#bda84f"
       title-inactive-color="#9B9B9B"
       color="#0BBC74"
       :swipe-threshold="6"
@@ -16,7 +16,7 @@
         :title="item.label"
         :name="item.value"
       ></van-tab>
-    </van-tabs> -->
+    </van-tabs>
     <van-list v-model="loading"  finished-text="------------我也是有底线的------------" :finished="finished" @load="onLoad">
       <div class="list-container">
         <div class="list-item" v-for="item in list" :key="item.id">
@@ -40,12 +40,12 @@
           </div>
           <div class="item-user">
             <div class="user-info">
-              <!-- <span>交易方：</span> -->
-              <!-- <img
+               <span>交易方：</span> -->
+              <img
                 :src="item.sellerAvatar"
                 class="user-avatar"
-              /> -->
-              <!-- <span class="user-name">{{ item.sellerName }}</span> -->
+              />
+              <span class="user-name">{{ item.sellerName }}</span>
             </div>
           </div>
           <div class="item-button-group">
@@ -176,6 +176,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {getbuylist} from "@/api/buy"
 export default {
   data() {
     return {
@@ -212,7 +213,8 @@ export default {
       // 选中的item
       selectItem: "",
       lastId: 0,
-      page: 1,
+      pageSize: 1,
+      pageNum:10,
       show: {
         uploadVoucher: false, // 展示上传凭证弹窗
         payBox: false, // 展示支付弹窗
@@ -355,20 +357,20 @@ export default {
      * 列表加载
      */
     onLoad() {
-      this.$post({
-        module: 'Nft',
-        interface: '1035',
+      //请求我的仓库的参数
+      getbuylist({
         data: {
-          lastId: this.lastId,
-          page: this.page,
+          // lastId: this.lastId,
+          pageSize: this.pageSize,
+          pageNum:this.pageNum,
           status: this.active
         }
       }).then(res => {
         this.loading = false;
         this.lastId = res.data.lastId
-        this.page ++
-        this.list.push(...res.data.list)
-        if(this.page > res.data.lastPage) {
+        this.pageSize ++
+        this.list.push(...res.data.rows)
+        if(this.pageSize > res.data.lastPage) {
           this.finished = true;
         }
         console.log(res,'买方列表')

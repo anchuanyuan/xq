@@ -4,7 +4,7 @@
       <div class="info flex-between">
         <div class="infoLeft flex-row">
           <img class="avatar" :src="userInfo.avatar" alt="" />
-          <div class="nickname">{{ userInfo.nickname }}</div>
+          <div class="nickname">{{ userInfo.userName}}</div>
         </div>
         <div>
           <img class="she_zhi" @click="$router.push('/self/set')" src="@/assets/img/self/she_zhi.png" alt="" />
@@ -127,6 +127,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {getuser,exitlogin} from "@/api/login";
+
 export default {
   data() {
     return {
@@ -197,13 +199,11 @@ export default {
     this.getMyGood()
   },
   methods: {
+    //获取用户信息的接口
     getUserInfo() {
-      this.$post({
-        module: 'User',
-        interface: '1000'
-      }).then(res => {
-        // console.log(res,'个人信息')
-        this.userInfo = res.data
+      getuser().then(res => {
+        console.log(res,'个人信息')
+        this.userInfo = res.rows
       })
     },
     onMenuItem(param) {
@@ -238,10 +238,9 @@ export default {
         cancelButtonColor: '#999999'
       })
         .then(() => {
-          this.$post({
-            module: 'Account',
-            interface: '2000',
-          }).then(res => {
+          //退出登录接口调用
+          exitlogin(
+    ).then(res => {
             // console.log(res,'退出登录')
             this.$toast(res.message)
             localStorage.removeItem('token')
