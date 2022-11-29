@@ -130,7 +130,7 @@ methods: {
   //   })
   //       this.img = res.data.file
   //   })
-  },
+  // },
   // 返回
   backPage(){
     this.$router.back(0)
