@@ -3,17 +3,18 @@
     <Header title="我的邀请二维码" :isback="true"></Header>
     <div style="background-color:#000000; height:15px"></div>
     <div class="qrcodeBox">
-      <simple-qr-code
-        :value="info.inviteUrl"
-      ></simple-qr-code>
+<!--      <simple-qr-code-->
+<!--        :value="info.inviteUrl"-->
+<!--      ></simple-qr-code>-->
+      <img src="../../../src/assets/img/self/warehouse/qcrode.jpg">
     </div>
-    <div class="nickname flex-center">{{ info.nickname }}</div>
+<!--    <div class="nickname flex-center">{{ info.nickname }}</div>-->
     <div class="tips flex-center">请直接截屏保存二维码</div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import SimpleQrCode from "../../components/SimpleQrCode.vue";
+// import SimpleQrCode from "../../components/SimpleQrCode.vue";
 export default {
   data() {
     return {
@@ -37,17 +38,21 @@ export default {
     },
   },
   components: {
-    "simple-qr-code": SimpleQrCode,
+    // "simple-qr-code": SimpleQrCode,
   },
 };
 </script>
 
 <style scoped lang="less">
 .qrcodeBox {
-  width: 343px;
-  height: 344px;
+  width: 243px;
+  height: 244px;
   background-color: #1B1B1B;
   margin: 69px auto 0;
+  img{
+    width:100%;
+    height:100%;
+  }
 }
 .nickname {
   font-size: 18px;

@@ -45,11 +45,10 @@ export function forgetpass (data) {
   })
 }
 // 获取用户信息
-export function getuser (id) {
+export function getUser () {
   return request({
     url: '/login/getInfo',
     method: 'get',
-    data: id
   })
 }
 // 退出登录

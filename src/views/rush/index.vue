@@ -36,6 +36,7 @@
 
 <script type="text/ecmascript-6">
 import {rushlist} from "@/api/rush/rushlist"
+import {getuser} from "@/api/login";
 
 export default {
   data() {
@@ -70,7 +71,7 @@ export default {
           this.$router.replace('/')
         })
     } else {
-      this.getUserInfo()
+      // this.getUserInfo()
       this.payDeposit()
     }
     
@@ -81,16 +82,14 @@ export default {
     getUserInfo() {
       //使用 AJAX 的 HTTP POST 请求从服务器加载数据
       //传参
-      this.$post({
-        module: 'Payment',
-        interface: '7000',
-        data: {
-        }
-      }).then(res => {
-        this.userInfo = res.data
-        // console.log(this.userInfo)
-        console.log(res,'信息')
-      })
+      // this.$post({
+      //   module: 'Payment',
+      //   interface: '7000',
+      //   data: {
+      //   }
+      // })
+      //
+
     },
 
     // toGoods(id,title) {
@@ -116,12 +115,13 @@ export default {
     // },
     //用户信息接口
     payDeposit(){
-      this.$post({
+      /*this.$post({
         module: 'User',
         interface: '1000',
         data: {
         }
-      }).then((res) => {
+      }).*/
+      getuser().then((res) => {
         this.bond = res.data.isEnsure
         // console.log(this.bond)
         // this.bond = 0

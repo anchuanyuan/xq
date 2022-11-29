@@ -3,7 +3,7 @@ import {Toast} from 'vant'
 import router from "@/router";
 
 function getToken() {
-    return localStorage.getItem("USER_TOKEN")
+    return localStorage.getItem("user")
 }
 
 

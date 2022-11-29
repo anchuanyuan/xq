@@ -1,4 +1,5 @@
 <template>
+
   <div class="center">
     <div class="top">
       <div class="info flex-between">
@@ -49,6 +50,7 @@
     <div class="seller">
       <div class="sellerTitle">卖方</div>
       <div class="sellerMenu flex-between">
+<!--      买方type状态为1 ，卖方状态为-1-->
         <router-link
           to="/self/warehouse/order?type=-1"
           class="sellerMenuItem flex-center"

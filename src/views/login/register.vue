@@ -63,6 +63,7 @@ export default {
   methods: {
     // 注册
     submit() {
+      //校验规则
       if(!this.nickName) return this.$toast('请输入昵称')
       if(!this.mobile) return this.$toast('请输入手机号')
       if(!this.password) return this.$toast('请输入密码')
