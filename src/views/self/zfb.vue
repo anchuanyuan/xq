@@ -96,17 +96,19 @@ methods: {
         type: '2',
       }
     })*/
-    userBankList(0).then(res => {
+    userBankList().then(res => {
       console.log(res,'绑定信息')
       // 通过账户名称是为为空  判断当前是否已完成绑定
-      if(res.data.accountName){
-        //  state 用来判断 输入框是否为只读状态
-        this.state = true
-        console.log(res.data.accountName)
-        // 赋值
-        this.accountName = res.data.accountName
-        this.account = res.data.account
-        this.imgUrl = res.data.payCode
+      if(res.data.length > 0){
+        let [zfbInfo] = res.data.filter( item=> item.bankType == 0 )
+        console.log(zfbInfo)
+        if(zfbInfo) {
+          //  state 用来判断 输入框是否为只读状态
+          this.state = true
+          this.accountName = zfbInfo.bankName
+          this.account = zfbInfo.bankNumber
+          this.imgUrl = zfbInfo.bankImg
+        }
       }else{
         this.$toast('当前还未绑定，请先绑定')
         this.state = false

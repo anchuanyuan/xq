@@ -4,9 +4,9 @@
     <div class="top_tips">银行卡</div>
     <div class="box">
       <div class="bank_info">
-        <p><span>姓名：</span> {{ bankList.owner }}</p>
-        <p><span>卡号：</span> {{ bankList.cardNo }}</p>
-        <p><span>开户行：</span> {{ bankList.bankName }}</p>
+        <p><span>姓名：</span> {{ bankInfo.userName }}</p>
+        <p><span>卡号：</span> {{ bankInfo.bankNumber }}</p>
+        <p><span>开户行：</span> {{ bankInfo.bankName }}</p>
       </div>
       <div class="bank_tips">
         <p>银行卡的信息对您来说十分重要</p>
@@ -36,7 +36,7 @@ export default {
       name:'',
       bankNo: '',
       bankCardNo:'',
-      bankList: ''
+      bankInfo: {}
     };
   },
   methods: {
@@ -55,7 +55,9 @@ export default {
       })*/
       addBank({
         bankType: 1, // 收款类型 0:支付宝 1:银行卡 2:微信，
-        bankNumber:this.bankNo,
+        bankNumber:this.bankNo, // 卡号
+        userName: this.name, // 用户真名
+        bankName: this.bankCardNo // 开户行
         // bankImg:
       }).then(res => {
         console.log(res)
@@ -65,19 +67,14 @@ export default {
       })
     },
     getData() {
-      /*this.$post({
-        module: 'Payment',
-        interface: '1000',
-        data: {
-        }
-      })*/
-      userBankList(1).then(res => {
-        // console.log(res,'银行卡列表')
-        if(res.data.list.length < 1) {
+      userBankList().then(res => {
+        const [...bankInfo] = res.data.filter( item=> item.bankType == 1 )
+        console.log(bankInfo,'银行卡列表')
+        if(bankInfo.length < 1) {
           this.btnShow = true
         } else {
           this.btnShow = false
-          this.bankList = res.data.list[0]
+          this.bankInfo = bankInfo[0]
         }
       })
     }

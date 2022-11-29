@@ -4,13 +4,13 @@
     <div class="outside" style="background: #1b1b1b">
       <div class="income-box">
         <div>
-          <div class="income-num"><small>￥</small>{{profitList.day}}</div>
+          <div class="income-num"><small>￥</small>{{allIncome}}</div>
           <!-- <div class="income-label">今日邀请</div> -->
           <div class="income-label">累计收益</div>
         </div>
         <div>|</div>
         <div>
-          <div class="income-num"><small>￥</small>{{profitList.count}}</div>
+          <div class="income-num"><small>￥</small>{{dayIncom}}</div>
           <!-- <div class="income-label">历史邀请</div> -->
           <div class="income-label">今日收益</div>
         </div>
@@ -25,9 +25,9 @@
       @load="onLoad"
     >
       <div class="list">
-        <van-cell center :border="true" v-for="(item,index) in list" :key="index" :label="item.createdAt" title="趣币获得"  >
+        <van-cell center :border="true" v-for="(item,index) in list" :key="index" :label="dayjs(item.createDate).format('YYYY-MM-DD HH:mm:ss') " title="趣币获得"  >
           <template>
-            <div :class="{ 'negative' : item < 0 }"> {{ item.value }}</div>
+            <div :class="{ 'negative' : item < 0 }"> {{ item.afterNum }}</div>
           </template>
         </van-cell>
       </div>
@@ -36,23 +36,30 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {getDayInCome, getInComeAll, inComeList} from "@/api/my/income";
+import dayjs from "dayjs"
+
 export default {
   data() {
     return {
+      dayjs,
       list: [],
+      dayIncome: '',
+      allIncome: '',
       active: 0,
       loading: false,
       finished: false,
-      profitList:[],
-      lastId: 0,
-      page: 1,
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10
+      }
     };
   },
   methods: {
     onLoad() {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-      this.$post({
+      /*this.$post({
         module: 'Finance',
         interface: '9090',
         data: {
@@ -64,14 +71,13 @@ export default {
             type:'0'
           },
         }
-      }).then(res => {
+      })*/
+      inComeList(this.queryParams).then(res => {
         this.loading = false
         console.log(res,'直推收益列表')
-        this.profitList = res.data
-        this.page++
-        this.lastId = res.data.lastId
-        this.list.push(...res.data.list)
-        if (this.page > res.data.lastPage) {
+        this.queryParams.pageNum ++
+        this.list.push(...res.rows)
+        if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
           this.finished = true
         }
       })
@@ -80,9 +86,19 @@ export default {
       //   this.loading = false;
       //   this.finished = true;
       // }, 1000);
+
     },
+    getInCome () {
+      getDayInCome().then( res =>{
+        this.dayIncome  = res.data
+      })
+      getInComeAll().then(res=>{
+        this.allIncome = res.data
+      })
+    }
   },
   created() {
+    this.getInCome()
   },
   components: {},
 };

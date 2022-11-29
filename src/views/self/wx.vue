@@ -11,7 +11,7 @@
         <div class="title">收款二维码</div>
         <div class="pic">
             <van-uploader
-            :after-read="afterRead"
+            :before-read="beforeRead"
             v-model="fileList"
             multiple
             :max-count="1"
@@ -32,7 +32,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {userBankList} from "@/api/my/userBank";
+import {addBank, userBankList} from "@/api/my/userBank";
+import {upload} from "@/api/common";
 
 export default {
   data() {
@@ -51,15 +52,24 @@ export default {
     this.getDetails()
   },
   methods: {
-    afterRead(file) {
+    beforeRead (file) {
+      upload(file).then(res => {
+        console.log(res)
+        this.fileList = [{
+          url: res.data
+        }]
+        this.img = res.data
+      })
+    },
+    /*afterRead(file) {
       this.$upload(file.file).then(res => {
           this.img = res.data.file
       })
-    },
+    },*/
     submit() {
       if(!this.accountName) return this.$toast('请输入账户名称')
       if(!this.img) return this.$toast('请上传收款二维码')
-      this.$post({
+      /*this.$post({
         module: 'Finance',
         interface: '7001',
         data: {
@@ -67,6 +77,11 @@ export default {
           account_name:  this.accountName,
           pay_code: this.img
         }
+      })*/
+      addBank({
+        bankType: 2, // 收款类型 0:支付宝 1:银行卡 2:微信
+        bankImg: this.img, // 二维码
+        bankName: this.accountName //  用户名
       }).then(res => {
         console.log(res)
         this.$toast(res.message)
@@ -83,16 +98,22 @@ export default {
           type: '1',
         }
       })*/
-      userBankList(2).then(res => {
+      userBankList().then(res => {
         // 通过账户名称是为为空  判断当前是否已完成绑定
-        if(res.data.accountName){
-          //  state 用来判断 输入框是否为只读状态
-          this.state = true
-          console.log(res.data.accountName)
-          // 赋值
-          this.accountName = res.data.accountName
-          this.imgUrl = res.data.payCode
-        }else{
+        if(res.data.length > 0){
+          let [wsInfo] = res.data.filter( item=> item.bankType == 2 )
+          console.log(wsInfo)
+          if(wsInfo) {
+            //  state 用来判断 输入框是否为只读状态
+            this.state = true
+            this.accountName = wsInfo.bankName
+            this.account = wsInfo.bankNumber
+            this.imgUrl = wsInfo.bankImg
+          } else  {
+            this.$toast('当前还未绑定，请先绑定')
+            this.state = false
+          }
+        } else {
           this.$toast('当前还未绑定，请先绑定')
           this.state = false
         }
