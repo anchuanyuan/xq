@@ -3,18 +3,18 @@
     <Header isback title="抢购详情"></Header>
     <div class="top_img">
       <van-swipe class="my-swipe" height="300" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item, index) in info.nftImg" :key="index">
+        <van-swipe-item v-for="(item, index) in info.robGoodImg" :key="index">
           <img :src="item" alt="">
         </van-swipe-item>
       </van-swipe>
       <!-- <img :src="info.nftImg" alt=""> -->
     </div>
     <div class="good_info">
-      <div class="name">{{ info.nftName }}</div>
-      <p class="text">{{ info.sceneName }}</p>
+      <div class="name">{{ info.robGoodName }}</div>
+      <p class="text">{{ info.siteName }}</p>
       <div class="detail">
         <p class="flex-between">
-          <span>编号：{{ info.orderNo }}</span>
+          <span>编号：{{ info.robGoodCode }}</span>
           <!-- <span>所属人：{{ info.username }}</span> -->
         </p>
         <p>价格： <span class="red">￥{{ parseInt(Number(info.price)) }}</span></p>
@@ -24,11 +24,12 @@
     </div>
     <div class="footer_btn">
       <!-- <van-button class="btnCard" v-if="info.isBuy == 1" type="default" :disabled="!type" @click="falseSubmit">{{ type ? '立即抢购' : '已售罄'}}</van-button> -->
-      <van-button class="btnCard" v-if="info.isBuy == 1" type="default" :disabled="disabled" @click="submit">立即抢购
+      <van-button class="btnCard" type="default" :disabled="disabled" @click="submit">立即抢购
       </van-button>
-      <van-button class="btnBuy" v-else type="default">即将抢购：
-        <van-count-down @finish="finishDown" :time="info.time * 1000" />
-      </van-button>
+<!--      <van-button class="btnBuy" v-else type="default">即将抢购：-->
+<!--        <van-count-down @finish="finishDown" :time="info.time * 1000" />-->
+<!--      </van-button>-->
+<!--      v-if="this.isBuy == 1"-->
     </div>
     <van-dialog v-model="show" title=" " confirm-button-color="#000">
       <img class="false_img" src="../../assets/img/rush/shouqin.png" />
@@ -37,22 +38,41 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {getByid} from "@/api/rush/page"
+import {getByid, getById, inFolist,getBylist} from "@/api/rush/page"
 export default {
   data() {
     return {
-      id: '',
+      //场次ID
+      robGoodId: '',
+      //下标
+      index:'',
+      //商品id
+      robSellId:'',
+      //页数
+      size:'',
       info: '',
+      isBuy:'',
       disabled: false,
       type: true,
       show: false
     };
   },
-  //创建后生命周期
+  //创建后生命周期  接收商品列表的跳转传参
   created() {
-    if (this.$route.query.id) {
-      this.id = this.$route.query.id
-    }
+    // if (this.$route.query.id) {
+    //商品id
+      this.robGoodId = this.$route.query.robGoodId
+      console.log(this.robGoodId,'场次id')
+    //场次ID
+      this.robSellId = this.$route.query.robSellId
+      console.log(this.robSellId,'商品ID')
+    //页数
+    this.size = this.$route.query.size
+    console.log(this.size,'页数')
+    //下标
+    this.index = this.$route.query.index
+    console.log(this.index,'下标')
+    // }
     this.getInfo()
   },
   methods: {
@@ -79,30 +99,37 @@ export default {
       //     id: this.id
       //   }
       // })
-      getByid({
-        id: this.id
+      inFolist({
+        robGoodId: this.robGoodId,  //场次ID
+        index: this.index,  //下标
+        robSellId: this.robSellId,  //商品ID
+        size:this.size  //页数
       }).then(res => {
-        console.log(res,'商品详情')
+        console.log(res,'抢购商品')
         this.info = res.data
+        // console.log(this.info)
       })
     },
 
 
     //点击立即购买
     submit() {
-      this.disabled = true
-      this.$post({
-        module: 'Nft',
-        interface: '1030',
-        data: {
-          id: this.info.id
-        }
-      }).then(res => {
-        //弹出框
-        this.$toast(res.message)
-        this.$router.back()
-        // console.log(res,'购买详情')
-      })
+    //   // this.disabled = true
+    //   // this.$post({
+    //   //   module: 'Nft',
+    //   //   interface: '1030',
+    //   //   data: {
+    //   //     id: this.info.id
+    //   //   }
+    //   // })
+    //   inFolist({
+    //     id: this.info.robGoodId
+    //   }).then(res => {
+    //     //弹出框
+    //     this.$toast(res.message)
+    //     // this.$router.back()
+    //     console.log(res,'抢购商品详情')
+    //   })
     }
   }
 };
