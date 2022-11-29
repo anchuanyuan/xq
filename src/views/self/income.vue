@@ -10,7 +10,7 @@
         </div>
         <div>|</div>
         <div>
-          <div class="income-num"><small>￥</small>{{dayIncom}}</div>
+          <div class="income-num"><small>￥</small>{{dayIncome}}</div>
           <!-- <div class="income-label">历史邀请</div> -->
           <div class="income-label">今日收益</div>
         </div>

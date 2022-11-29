@@ -4,13 +4,13 @@
     <div class="top_img">
       <van-swipe class="my-swipe" height="300" :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="(item, index) in info.goodsImage" :key="index">
-          <img :src="info.goodsMasterImage" alt="">
+            <img :src="info.goodsMasterImage" alt="">
         </van-swipe-item>
       </van-swipe>
     </div>
     <div class="good_info">
       <div class="topbox">
-        <p><span>{{ parseInt(Number(info.numerical))  }} 趣币</span></p>
+        <p><span>{{ parseInt(Number(info.goodPrice))  }} 趣币</span></p>
         <div class="name">{{ info.goodName }}</div>
       </div>
       <!-- <p class="text">{{ info.seriesName }}</p> -->
@@ -25,17 +25,14 @@
         <div class="">
           <p style="color: #ffffff">商品详情</p>
           <div class="box1">
-            <p>尺寸 : {{ info.size }}</p>
-            <p>材质 : {{ info.material }}</p>
+            {{info.goodDescribe }}
           </div>
-          <p style="margin-bottom:10px;">板数 : {{ info.plate_number }}</p>
-          <!-- <p class="good_details" v-html="info.desc"></p> -->
         </div>
       </div>
       <div class="text-box">
         <p>--- 详情图 ---</p>
         <div>
-          <img :src="info.goodsImage" style="width:100%" alt="">
+          <img :src="info.goodImg" style="width:100%" alt="">
         </div>
       </div>
     </div>
@@ -60,31 +57,33 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {exchangeGoods, goodDetail} from "@/api/home/goods";
+
 export default {
   data() {
     return {
-      id: '',
       info: {},
       goodsShow:false,
       goodId:'',
     };
   },
   created() {
-    if(this.$route.query.id) {
-      this.id = this.$route.query.id
+    if(this.$route.query.goodId) {
+      this.goodId = this.$route.query.goodId
       this.getData()
       // this.takeSubmit()
     }
   },
   methods: {
     getData() {
-      this.$post({
+      /*this.$post({
         module: 'IntegralGood',
         interface: '1300',
         data: {
           id: this.id
         }
-      }).then(res => {
+      })*/
+    goodDetail(this.goodId).then(res => {
         // console.log(res,'商品详情')
         this.info = res.data
       })
@@ -104,18 +103,20 @@ export default {
     },
     // 提取货物弹窗 确认
     takeSubmit(){
-      this.$post({
+      /*this.$post({
         module: 'IntegralGood',
         interface: '1200',
         data: {
           goodId: this.id
         }
+      })*/
+      exchangeGoods({
+        goodId:this.goodId,
+        num: 1
       }).then(res => {
         // 关闭弹窗
         this.goodsShow = false
         this.$toast(res.message)
-        //  刷新商品列表
-        this.changeTab()
       })
     },
     // 提取货物弹窗 取消
@@ -155,6 +156,7 @@ export default {
     }
   }
   .good_info {
+    margin-top: 20px;
     .topbox {
       padding: 20px 20px;
       p {

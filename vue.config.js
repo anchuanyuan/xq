@@ -8,15 +8,14 @@ module.exports = {
       [process.env.VUE_APP_BASE_API]: {
         // 如果需要使用正式地址测试，请将此处地址改为正式地址
         // target: 'https://www.apis.xianqujingpin.com',
-        target: 'http://47.98.56.192',
+        // target: 'http://47.98.56.192',
+        target: 'http://localhost:8999',
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          // ['^' + process.env.VUE_APP_BASE_API]: ''
+          ['^' + process.env.VUE_APP_BASE_API]: ''
         },
-        headers: {
-          Referer: 'https://4y09576317.zicp.fun'
-        }
+
       }
     }
   },

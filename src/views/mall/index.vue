@@ -6,7 +6,7 @@
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
           <van-swipe-item v-for="(item,index) in bannerList" :key="index">
             <!-- <div>{{item.src}}</div> -->
-            <img class="img" :src="item.src" alt="">
+            <img class="img" :src="item.carouselImg" alt="">
             <!-- <img src="../../picture/组 3 拷贝.png" alt=""> -->
           </van-swipe-item>
         </van-swipe>
@@ -14,12 +14,12 @@
 
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="good_list">
-          <div class="good_list_item" @click="$router.push('/mall/details?id=' + item.id)" v-for="(item,index) in list"
+          <div class="good_list_item" @click="$router.push('/mall/details?goodId=' + item.goodId)" v-for="(item,index) in list"
             :key="index">
-            <div class="good_list_item_tu"><img :src="item.goodsMasterImage" alt=""></div>
+            <div class="good_list_item_tu"><img :src="item.goodImg" alt=""></div>
             <p class="name">{{ item.goodName }}</p>
             <div class="good_list_item_img">
-              <p class="perice">{{ parseInt(Number(item.numerical)) }}趣币</p>
+              <p class="perice">{{ parseInt(Number(item.goodPrice)) }}趣币</p>
               <img src="../../picture/jian1.png" alt="" class="img1">
             </div>
 
@@ -33,6 +33,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { goodsList } from '@/api/home/goods'
+import {getswiperlist} from "@/api/swiper";
 export default {
   data() {
     return {
@@ -45,6 +47,11 @@ export default {
       popupInfo: {},
       show: false,
       finished: false,
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        goodType: 1
+      },
       classifyList: [],
       hotList: [
         {
@@ -84,20 +91,20 @@ export default {
   },
   methods: {
     onLoad() {
-      this.$post({
+      /*this.$post({
         module: 'IntegralGood',
         interface: '1001',
         data: {
           lastId: this.lastId,
           page: this.page
         }
-      }).then(res => {
+      })*/
+      goodsList(this.queryParams).then(res => {
         this.loading = false
         // console.log(res,'数据列表')
-        this.page++
-        this.lastId = res.data.lastId
-        this.list.push(...res.data.list)
-        if (this.page > res.data.lastPage) {
+        this.queryParams.pageNum++
+        this.list.push(...res.rows)
+        if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
           this.finished = true
         }
       })
@@ -118,16 +125,17 @@ export default {
       }
     },
     getBanner() {
-      this.$post({
+      /*this.$post({
         module: 'Content',
         interface: '1000',
-      }).then(res => {
+      })*/
+      getswiperlist().then(res => {
         console.log("轮播图")
         console.log(res,'广告图列表')
-        this.bannerList = res.data.list
+        this.bannerList = res.data
       })
     },
-    getclassifyList() {
+/*    getclassifyList() {
       this.$post({
         module: 'Good',
         interface: '1000',
@@ -135,7 +143,7 @@ export default {
         // console.log(res,'热门分类')
         this.classifyList = res.data
       })
-    },
+    },*/
     getUserInfo() {
       this.$post({
         module: 'User',
@@ -164,9 +172,9 @@ export default {
   },
   pass: true,
   created() {
-    this.getPopupInfo()
+    // this.getPopupInfo()
     this.getBanner()
-    this.getclassifyList()
+    // this.getclassifyList()
     // this.$emit("update:status", false);
   },
 };
@@ -256,6 +264,7 @@ export default {
   }
 
   .my-swipe {
+    height: 100%!important;
     margin-top: -30px;
 
     .van-swipe-item {

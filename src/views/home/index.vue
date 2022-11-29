@@ -117,7 +117,8 @@ export default {
       queryParams: {
         pageSize: 10,
         pageNum: 1,
-        goodName: undefined
+        goodName: undefined,
+        goodType: 0
       },
       hotList: [
         {

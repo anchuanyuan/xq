@@ -16,3 +16,14 @@ export function goodDetail(id) {
         method: 'get',
     })
 }
+
+// 兑换商品
+
+export function exchangeGoods(data) {
+    return request({
+        url: `/shopGood/insertGood`,
+        method: 'post',
+        data
+    })
+}
+
