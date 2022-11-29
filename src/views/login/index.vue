@@ -56,14 +56,15 @@ export default {
       // })
       login({
         userPhone: this.mobile,
-        password: encrypt(this.password)
+        // password: encrypt(this.password)
+        password: 123456
       }).then(res => {
         this.loginShow = false
         localStorage.setItem('USER_MODILE', this.mobile)
         this.disabled = false
         this.$toast('登陆成功')
         this.$router.push('/')
-        localStorage.setItem("token", res.data.accessToken);
+        localStorage.setItem("USER_TOKEN", res.token);
       }).catch(() => {
         this.loginShow = false
         this.disabled = false

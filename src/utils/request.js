@@ -150,9 +150,10 @@ service.interceptors.response.use(res => {
         }
         if (code === 401) {
             Toast.fail({ message: msg })
-            store.commit("removeUser","USER_TOKEN") // 退出登录
+            // store.commit("removeUser","USER_TOKEN")
+            localStorage.removeItem("USER_TOKEN"); //  退出登录
             // 跳转登录
-            this.$router.push('/login')
+            this.$router.replace('/login')
             return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
         } else if (code === 500) {
             Toast.fail({ message: msg })
