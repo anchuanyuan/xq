@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 /**
  * 用户token
  */
-const USER_NAME = "USER_TOKEN";
+const USER_NAME = process.env.VUE_APP_TOKEN_NAME ;
 /**
  * 语言名称
  */

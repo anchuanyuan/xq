@@ -36,7 +36,7 @@
 
 <script type="text/ecmascript-6">
 import {rushlist} from "@/api/rush/rushlist"
-import {getuser} from "@/api/login";
+import {getUser} from "@/api/login";
 
 export default {
   data() {
@@ -121,7 +121,7 @@ export default {
         data: {
         }
       }).*/
-      getuser().then((res) => {
+      getUser().then((res) => {
         this.bond = res.data.isEnsure
         // console.log(this.bond)
         // this.bond = 0

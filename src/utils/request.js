@@ -3,7 +3,7 @@ import {Toast} from 'vant'
 import router from "@/router";
 
 function getToken() {
-    return localStorage.getItem("user")
+    return localStorage.getItem(process.env.VUE_APP_TOKEN_NAME )
 }
 
 
@@ -151,7 +151,7 @@ service.interceptors.response.use(res => {
         if (code === 401) {
             Toast.fail({ message: msg })
             // store.commit("removeUser","USER_TOKEN")
-            localStorage.removeItem("USER_TOKEN"); //  退出登录
+            localStorage.removeItem(process.env.VUE_APP_TOKEN_NAME); //  退出登录
             // 跳转登录
             router.replace('/login')
             return Promise.reject('无效的会话，或者会话已过期，请重新登录。')

@@ -60,11 +60,11 @@ export default {
         password: 123456
       }).then(res => {
         this.loginShow = false
-        localStorage.setItem('USER_MODILE', this.mobile)
+        localStorage.setItem(process.env.VUE_APP_TOKEN_NAME, this.mobile)
         this.disabled = false
         this.$toast('登陆成功')
         this.$router.push('/')
-        localStorage.setItem("USER_TOKEN", res.token);
+        localStorage.setItem(process.env.VUE_APP_TOKEN_NAME , res.token);
       }).catch(() => {
         this.loginShow = false
         this.disabled = false
