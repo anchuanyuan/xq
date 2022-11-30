@@ -98,6 +98,7 @@
 <script type="text/ecmascript-6">
 import {getswiperlist} from "@/api/swiper";
 import {goodsList} from "@/api/home/goods"
+import {getUser} from "@/api/login";
 // import {goodsList} from "@/api/home/goods";
 
 export default {
@@ -221,12 +222,13 @@ export default {
       })
     },
     getUserInfo() {
-      this.$post({
+      /*this.$post({
         module: 'User',
         interface: '1000',
         data: {
         }
-      }).then(res => {
+      })*/
+      getUser().then(res => {
         // console.log(res,'用户基本信息')
         if (res.data.isPopUp) {
           this.show = true
@@ -248,9 +250,9 @@ export default {
   },
   pass: true,
   created() {
-    this.getPopupInfo()
+    // this.getPopupInfo()
     this.getBanner()
-    this.getclassifyList()
+    // this.getclassifyList()
     // this.$emit("update:status", false);
   },
 };

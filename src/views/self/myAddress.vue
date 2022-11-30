@@ -7,13 +7,13 @@
         class="box flex-between"
         v-for="(item, index) in list"
         :key="index"
-        @click="$router.push('/self/editAddress?id=' + item.id)"
+        @click="$router.push('/self/editAddress?addressId=' + item.addressId)"
       >
         <div class="address">
-          <div>收件人：{{ item.name }} {{ item.mobile }}</div>
-          <div>地址：{{ item.areaName }}</div>
-          <div>详细地址：{{ item.address }}</div>
-          <div class="default" v-if="item.isDefault">默认</div>
+          <div>收件人：{{ item.address }} {{ item.addressPhone }}</div>
+          <div>地址：{{ item.addressCity }}</div>
+          <div>详细地址：{{ item.addressDetails }}</div>
+          <div class="default" v-if="item.defaultStatus == 0">默认</div>
         </div>
         <div>
           <img src="../../picture/组 1325.png" alt="" />
@@ -45,8 +45,8 @@ export default {
         interface: '2000',
       })*/
       getAddress().then(res => {
-        // console.log(res,'收货地址列表')
-        this.list = res.data.list
+        console.log(res,'收货地址列表')
+        this.list = res.data
       })
     }
   },

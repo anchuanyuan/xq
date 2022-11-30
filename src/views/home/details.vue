@@ -3,7 +3,7 @@
     <Header isback title="商品详情"></Header>
     <div class="top_img">
       <van-swipe class="my-swipe" height="300" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item, index) in info.goodImg" :key="index">
+        <van-swipe-item v-for="(item, index) in goodImgs" :key="index">
           <img :src="item" alt="">
         </van-swipe-item>
       </van-swipe>
@@ -14,8 +14,8 @@
       <div class="detail">
         <p>编号：{{ info.orderNo }}</p>
         <p>价格： <span>￥{{ parseInt(Number(info.goodPrice)) }}</span></p>
-        <p>剩余数量： {{ info.surplus }}</p>
-        <p>上架时间：{{ info.createDate }} </p>
+        <p>剩余数量： {{ info.goodStock }}</p>
+        <p>上架时间：{{ dayjs(info.createDate).format('YYYY-MM-DD HH:mm:ss') }} </p>
         <p>商品详情</p>
         <p class="good_details" v-html="info.goodDescribe"></p>
       </div>
@@ -33,12 +33,15 @@
 <script type="text/ecmascript-6">
 import {goodDetail} from "@/api/home/goods";
 import { shopCartAdd} from "@/api/shopcar/shopcar";
+import dayjs from "dayjs";
 
 export default {
   data() {
     return {
       goodId: '',
-      info: {}
+      dayjs,
+      info: {},
+      goodImgs:[],
     };
   },
   created() {
@@ -59,6 +62,7 @@ export default {
       goodDetail(this.goodId).then(res => {
         // console.log(res,'商品详情')
         this.info = res.data
+        this.goodImgs = res.goodImgs ? res.goodImgs.split(",") : []
       })
     },
     addCart() {

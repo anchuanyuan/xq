@@ -17,9 +17,9 @@
       <div class="detail">
         <div class="box1">
           <p>编号：{{ info.goodCode }}</p>
-          <p>剩余数量： {{ info.stock }}</p>
+          <p>剩余数量： {{ info.goodStock }}</p>
         </div>
-        <p style="margin-top:10px">上架时间：{{ info.createdAt }} </p>
+        <p style="margin-top:10px">上架时间：{{ dayjs(info.createDate).format('YYYY-MM-DD HH:mm:ss') }} </p>
       </div>
       <div class="detail">
         <div class="">
@@ -58,14 +58,16 @@
 
 <script type="text/ecmascript-6">
 import {exchangeGoods, goodDetail} from "@/api/home/goods";
-
+import dayjs from "dayjs";
 export default {
   data() {
     return {
       info: {},
       goodsShow:false,
       goodId:'',
-    };
+      goodImgs: [],
+      dayjs
+    }
   },
   created() {
     if(this.$route.query.goodId) {
@@ -86,6 +88,7 @@ export default {
     goodDetail(this.goodId).then(res => {
         // console.log(res,'商品详情')
         this.info = res.data
+        this.goodImgs = res.data.goodImgs ?  res.data.goodImgs.split(",") : []
       })
     },
     addCart() {
@@ -111,7 +114,7 @@ export default {
         }
       })*/
       exchangeGoods({
-        goodId:this.goodId,
+        goodId: Number(this.goodId),
         num: 1
       }).then(res => {
         // 关闭弹窗

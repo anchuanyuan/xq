@@ -21,7 +21,7 @@ export function addAddress(data) {
     return request({
         url: `/shopAddress/insert`,
         method: 'post',
-        params: data
+        data: data
     })
 }
 
@@ -30,7 +30,7 @@ export function updateAddress(data) {
     return request({
         url: `/shopAddress/update`,
         method: 'post',
-        params: data
+        data
     })
 }
 
