@@ -16,7 +16,7 @@
       </van-cell>
       <van-cell>
         <template #title>
-          手机号：<span class="text">{{ userInfo.account }}</span>
+          手机号：<span class="text">{{ userInfo.userPhone }}</span>
         </template>
       </van-cell>
       <van-cell>
@@ -48,6 +48,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {getUser} from "@/api/login";
+
 export default {
   data() {
     return {
@@ -106,10 +108,11 @@ export default {
     },
     // 获取用户信息
     getUserInfo() {
-      this.$post({
+      /*this.$post({
         module: 'User',
         interface: '1000'
-      }).then(res => {
+      })*/
+      getUser().then(res => {
         // console.log(res,'个人信息')
         this.userInfo = res.data
       })

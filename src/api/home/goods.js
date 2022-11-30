@@ -19,11 +19,14 @@ export function goodDetail(id) {
 
 // 兑换商品
 
-export function exchangeGoods(data) {
+export function exchangeGoods(query) {
     return request({
         url: `/shopGood/insertGood`,
         method: 'post',
-        data
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        params: query
     })
 }
 

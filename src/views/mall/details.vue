@@ -117,9 +117,15 @@ export default {
         goodId: Number(this.goodId),
         num: 1
       }).then(res => {
-        // 关闭弹窗
+        if(res.data.code !== 200 ) {
+          this.$toast(res.data.msg)
+        }
+        if(res.code == 200) {
+          // 关闭弹窗
+          this.$toast(res.data.msg + ' ,兑换完成')
+        }
+        this.getData()
         this.goodsShow = false
-        this.$toast(res.message)
       })
     },
     // 提取货物弹窗 取消

@@ -18,9 +18,9 @@ export function shopCartAdd(data) {
     })
 }
 
-export function delShopCart(idList) {
+export function delShopCart(ids) {
     return request({
-        url: `/shopCart/${idList}`,
+        url: `/shopCart/delete/${ids}`,
         method: 'delete',
     })
 }

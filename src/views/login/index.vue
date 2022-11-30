@@ -60,7 +60,7 @@ export default {
         password: 123456
       }).then(res => {
         this.loginShow = false
-        localStorage.setItem(process.env.VUE_APP_TOKEN_NAME, this.mobile)
+        localStorage.setItem("USER_MODILE", this.mobile)
         this.disabled = false
         this.$toast('登陆成功')
         this.$router.push('/')

@@ -74,10 +74,8 @@ export default {
           num: 1
         }
       })*/
-      shopCartAdd({
-        goodsId: this.goodId
-      }).then(res => {
-        this.$toast(res.message)
+      shopCartAdd(this.info).then(res => {
+        this.$toast(res.msg)
       })
       
     },

@@ -4,7 +4,7 @@
       style="position: fixed;width: 100%;"
       title="购物车"
       :right-text="deleted ? '取消' : '编辑'"
-      @click-right="deleted = !deleted"
+      @click-right="edit"
     />
     <!-- 空数据 -->
     <van-empty
@@ -24,11 +24,11 @@
               <div class="goodsBox">
                 <div class="redio">
                   <div>
-                    <van-radio @click="changeRadio(item)" checked-color="#F6D692"  icon-size="15px" :name="item.id"></van-radio>
+                    <van-radio @click="changeRadio(item)" checked-color="#F6D692"  icon-size="15px" :name="item.goodId"></van-radio>
                   </div>
                 </div>
                 <div class="goodsImg">
-                  <img :src="item.goodCover" alt="" />
+                  <img :src="item.goodImg" alt="" />
                 </div>
                 <div class="goodsInfo">
                   <div class="title">
@@ -39,13 +39,13 @@
                     <!-- <div>X{{ item.num }}</div> -->
                   </div>
                   <div class="flex-between price">
-                    <div><small>￥</small> {{ item.price }}</div>
+                    <div><small>￥</small> {{ item.goodPrice }}</div>
                     <!-- <div><van-stepper disable-input async-change @plus="changeNum(item.num)" @minus="changeNum(item.num)" v-model="item.num" /></div> -->
                   </div>
                 </div>
               </div>
               <transition name="van-fade">
-                <div class="del" v-show="deleted" @click="delCartGoods(item.id)">
+                <div class="del" v-show="deleted" @click="delCartGoods(item.goodId)">
                   <van-icon name="delete" size="18" color="#FFFFFF" />
                 </div>
               </transition>
@@ -89,6 +89,9 @@ export default {
     };
   },
   methods: {
+    edit () {
+      this.deleted = !this.deleted
+    },
     submit() {
       if(!this.radio) return this.$toast('请至少选择一件商品')
       this.$post({
@@ -107,7 +110,7 @@ export default {
       })
     },
     changeRadio(item) {
-      this.allPrice = item.price
+      this.allPrice = item.goodPrice
       this.num = item.num
       this.info = item
     },
@@ -125,24 +128,18 @@ export default {
           page: this.page
         }
       })*/
-      shopCartList(this.queryParams).then(res => {
+     this.getList()
+    },
+    getList() {
+      this.list = []
+      shopCartList().then(res => {
         console.log(res,'购物传列表')
         this.loading = false
-        this.queryParams.pageNum ++
-        this.list.push(...res.data)
+        this.list = res.data
         this.finished = true
-        // if (this.queryParams.pageSize * this.queryParams.pageNum >= res.total) {
-        //   this.finished = true
-        // }
       })
     },
-    getStart() {
-      this.finished = false
-      this.loading = false
-      this.queryParams.pageNum = 1
-      this.list = []
-    },
-    delCartGoods(id) {
+    delCartGoods(goodId) {
       this.$dialog
         .confirm({
           title: "提示",
@@ -158,9 +155,10 @@ export default {
               ids: [id]
             }
           })*/
-          delShopCart({}).then(res => {
-            this.$toast(res.message)
-            this.getStart()
+          console.log("goodId==========",goodId)
+          delShopCart([goodId].join(",")).then(res => {
+            this.$toast(res.msg)
+            this.getList()
             // console.log(res)
           })
         })
